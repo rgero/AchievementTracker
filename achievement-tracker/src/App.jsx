@@ -7,6 +7,7 @@ import DummyPage from "./pages/DummyPage"
 import GlobalStyles from "./styles/GlobalStyles"
 import Login from "./pages/LoginPage"
 import PageNotFound from "./pages/PageNotFound"
+import SignupPage from "./pages/SignupPage"
 import { Toaster } from "react-hot-toast"
 
 const queryClient = new QueryClient({
@@ -34,6 +35,7 @@ const App = () => {
               <Route path='*' element={<PageNotFound/>} />
             </Route>
             <Route path='login' element={<Login/>} />
+            <Route path='signup' element={<SignupPage/>} />
           </Routes>
         </BrowserRouter>
         <Toaster 
