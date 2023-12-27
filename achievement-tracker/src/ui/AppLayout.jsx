@@ -5,7 +5,12 @@ import styled from "styled-components"
 const StyledAppLayout = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
-  height: 100vh;
+
+  @media only screen and (mid-width: 768px)
+  {
+    height: 100vh;
+  }
+  
 `;
 
 const Main = styled.main`

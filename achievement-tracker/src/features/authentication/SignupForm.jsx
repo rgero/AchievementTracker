@@ -1,5 +1,6 @@
 import Button from "../../styles/Button";
 import Form from "../../ui/forms/Form";
+import FormButtonGroup from "../../ui/forms/FormButtonGroup";
 import FormRow from "../../ui/forms/FormRow";
 import Input from "../../styles/Input";
 import { useForm } from "react-hook-form";
@@ -66,13 +67,13 @@ const SignupForm = () => {
         />
       </FormRow>
 
-      <FormRow>
+      <FormButtonGroup>
         {/* type is an HTML attribute! */}
         <Button variation="secondary" type="reset" disabled={isLoading}>
           Cancel
         </Button>
         <Button disabled={isLoading}>Create new user</Button>
-      </FormRow>
+      </FormButtonGroup>
     </Form>
   )
 }

@@ -2,10 +2,10 @@
 
 import styled from "styled-components";
 
-const StyledFormRow = styled.div`
+const StyledFormButtonGroup = styled.div`
   display: flex;
-  flex-direction: column;
   width: 75%;
+  justify-content: space-evenly;
   margin: auto;
   padding: 10px 0;
 
@@ -49,14 +49,14 @@ const Error = styled.span`
 `;
 
 
-const FormRow = ({label, errors, children}) => {
+const FormButtonGroup = ({label, errors, children}) => {
     return (
-        <StyledFormRow>
+        <StyledFormButtonGroup>
             {label && <Label htmlFor={children.props.id}>{label}</Label>}
             {children}
             {errors && <Error>{errors}</Error> }
-        </StyledFormRow>
+        </StyledFormButtonGroup>
     )
 }
 
-export default FormRow
+export default FormButtonGroup
