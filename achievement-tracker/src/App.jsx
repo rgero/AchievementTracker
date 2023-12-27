@@ -5,8 +5,10 @@ import AppLayout from "./ui/AppLayout"
 import { DarkModeProvider } from "./context/DarkModeContext"
 import DummyPage from "./pages/DummyPage"
 import GlobalStyles from "./styles/GlobalStyles"
+import LandingPage from "./pages/LandingPage";
 import Login from "./pages/LoginPage"
 import PageNotFound from "./pages/PageNotFound"
+import ProtectedRoute from "./ui/ProtectedRoute";
 import SignupPage from "./pages/SignupPage"
 import { Toaster } from "react-hot-toast"
 
@@ -26,16 +28,16 @@ const App = () => {
       <BrowserRouter>
           <Routes>
             <Route element={
-              <>
+              <ProtectedRoute>
                 <AppLayout/>
-              </>
+              </ProtectedRoute>
             }>
-              <Route index element={<Navigate replace to='dummy'/>} />
               <Route path='dummy' element={<DummyPage/>} />
-              <Route path='*' element={<PageNotFound/>} />
             </Route>
+            <Route index element={<LandingPage/>} />
             <Route path='login' element={<Login/>} />
             <Route path='signup' element={<SignupPage/>} />
+            <Route path='*' element={<PageNotFound/>} />
           </Routes>
         </BrowserRouter>
         <Toaster 
