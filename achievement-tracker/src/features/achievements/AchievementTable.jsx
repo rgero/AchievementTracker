@@ -16,10 +16,11 @@ const AchievementTable = () => {
 
   return (
     <Menus>
-      <Table columns='4fr 1fr 1fr'>
+      <Table columns='4fr 1fr 0.25fr 0.25fr'>
         <Table.Header>
           <div>Name of Achievement</div>
           <div>Date</div>
+          <div>Weight</div>
         </Table.Header>
         <Table.Body 
           data={achievements} 

@@ -9,13 +9,14 @@ import { useDeleteAchievement } from "./hooks/useDeleteAchievement";
 /* eslint-disable react/prop-types */
 const AchievementRow = ({achievement}) => {
   const {isDeleting, deleteAchievement} = useDeleteAchievement();
-  const {id, ownerID, name, date} = achievement;
+  const {id, ownerID, name, weight, date} = achievement;
 
   const deleteID = id + "_" + ownerID;
   return (
     <Table.Row>
       <span>{name}</span>
       <span>{format(date, 'yyyy-MM-dd')}</span>
+      <span>{weight}</span>
       <div>
         <Modal>
           <Menus.Menu>

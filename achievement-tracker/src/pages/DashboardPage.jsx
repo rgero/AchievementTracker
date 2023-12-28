@@ -9,13 +9,12 @@ const DashboardPage = () => {
       <Row type="horizontal">
         <Heading as="h1">Dashboard</Heading>
         <div>
-          Placeholder
+          <AddAchievement/>
         </div>
       </Row>
 
       <Row>
         <AchievementTable/>
-        <AddAchievement/>
       </Row>
       
     </>
