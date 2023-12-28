@@ -11,3 +11,17 @@ export const getAchievements = async () => {
   }  
   return {data, count};
 }
+
+export const deleteAchievement = async (id) => 
+{
+  const { error } = await supabase
+      .from('achievements')
+      .delete()
+      .eq('id', id)
+
+  if (error)
+  {
+      console.error(error);
+      throw new Error("Achievement cannot be deleted");
+  }
+}

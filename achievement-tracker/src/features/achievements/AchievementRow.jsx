@@ -4,10 +4,14 @@ import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
 import Table from "../../ui/Table"
 import { format } from "date-fns";
+import { useDeleteAchievement } from "./hooks/useDeleteAchievement";
 
 /* eslint-disable react/prop-types */
 const AchievementRow = ({achievement}) => {
-  const {id, name, date} = achievement;
+  const {isDeleting, deleteAchievement} = useDeleteAchievement();
+  const {id, ownerID, name, date} = achievement;
+
+  const deleteID = id + "_" + ownerID;
   return (
     <Table.Row>
       <span>{name}</span>
@@ -15,9 +19,9 @@ const AchievementRow = ({achievement}) => {
       <div>
         <Modal>
           <Menus.Menu>
-            <Menus.Toggle id={id} />
+            <Menus.Toggle id={deleteID} />
 
-            <Menus.List id={id}>
+            <Menus.List id={deleteID}>
               <Modal.Open opens="delete">
                 <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
               </Modal.Open>
@@ -25,11 +29,11 @@ const AchievementRow = ({achievement}) => {
           </Menus.Menu>
           <Modal.Window name="delete">
               <ConfirmDelete
-                resourceName="guests"
-                disabled={true}
-                onConfirm={() => true}
+                resourceName="achievements"
+                disabled={isDeleting}
+                onConfirm={() => deleteAchievement(id)}
               />
-            </Modal.Window>
+          </Modal.Window>
         </Modal>
       </div>
     </Table.Row>
