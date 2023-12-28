@@ -1,4 +1,5 @@
 import AchievementTable from "../features/achievements/AchievementTable"
+import AddAchievement from "../features/achievements/AddAchievement"
 import Heading from "../ui/Heading"
 import Row from "../styles/Row"
 
@@ -12,7 +13,11 @@ const DashboardPage = () => {
         </div>
       </Row>
 
-      <AchievementTable/>
+      <Row>
+        <AchievementTable/>
+        <AddAchievement/>
+      </Row>
+      
     </>
   )
 }

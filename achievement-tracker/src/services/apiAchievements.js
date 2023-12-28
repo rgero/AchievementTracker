@@ -25,3 +25,12 @@ export const deleteAchievement = async (id) =>
       throw new Error("Achievement cannot be deleted");
   }
 }
+
+export const addAchievement = async (newAchievement) => {
+  const { error } = await supabase.from('achievements').insert([newAchievement])
+
+  if (error) {
+    console.error(error);
+    throw new Error("Achievement not added");
+  }
+}
