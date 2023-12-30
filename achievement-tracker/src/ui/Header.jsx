@@ -1,4 +1,5 @@
 import HeaderMenu from "./HeaderMenu";
+import UserAvatar from "../features/authentication/UserAvatar";
 import styled from "styled-components"
 
 const StyledHeader = styled.header`
@@ -17,6 +18,8 @@ const StyledTitle = styled.header`
 const StyledUser = styled.header`
   gap: 2.4rem;
   justify-content: flex-end;
+  flex-direction: row;
+  display:flex;
 `
 
 
@@ -27,6 +30,7 @@ const Header = () => {
           The Achievement Tracker
         </StyledTitle>
         <StyledUser>
+          <UserAvatar/>
           <HeaderMenu/>
         </StyledUser>
       </StyledHeader>
