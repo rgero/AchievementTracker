@@ -1,11 +1,14 @@
 import Button from "../styles/Button";
 import Card from "../ui/Card";
+import background from '../assets/background.jpg';
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
 
 const StyledLandingPage = styled.div`
   height: 100vh;
-  background-color: var(--color-grey-50);
+  background: url(${background});
+  background-repeat: space;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
