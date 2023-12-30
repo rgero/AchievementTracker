@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
+import Account from "./pages/Account";
 import AppLayout from "./ui/AppLayout"
 import { DarkModeProvider } from "./context/DarkModeContext"
 import DashboardPage from "./pages/DashboardPage";
@@ -35,6 +36,7 @@ const App = () => {
                   <AppLayout/>
                 </ProtectedRoute>
               }>
+                <Route path='account' element={<Account/>} />
                 <Route path="dashboard" element={<DashboardPage/>}/>
                 <Route path='dummy' element={<DummyPage/>} />
               </Route>
