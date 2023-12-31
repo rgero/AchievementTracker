@@ -1,4 +1,5 @@
 import HeaderMenu from "./HeaderMenu";
+import Title from "./Title";
 import UserAvatar from "../features/authentication/UserAvatar";
 import styled from "styled-components"
 
@@ -11,10 +12,6 @@ const StyledHeader = styled.header`
   align-items: center;
 `;
 
-const StyledTitle = styled.header`
-  font-weight: bold
-`
-
 const StyledUser = styled.header`
   gap: 2.4rem;
   justify-content: flex-end;
@@ -26,9 +23,9 @@ const StyledUser = styled.header`
 const Header = () => {
     return (
       <StyledHeader>
-        <StyledTitle>
+        <Title>
           The Achievement Tracker
-        </StyledTitle>
+        </Title>
         <StyledUser>
           <UserAvatar/>
           <HeaderMenu/>
