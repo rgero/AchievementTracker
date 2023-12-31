@@ -22,7 +22,7 @@ const CreateAchievementForm = ({onCloseModal}) => {
   const weightOptions = [{value: "low", label: "Low"}, {value: "Medium", label: "Medium"}, {value: "High", label: "High"},]
 
   const onSubmit = (data) => {
-    data = {...data, ownerID: user.id}
+    data = {...data, owner_id: user.id}
     addAchievement(data, 
       {onSuccess: () => {
           reset();
