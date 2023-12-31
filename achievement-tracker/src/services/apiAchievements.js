@@ -34,3 +34,17 @@ export const addAchievement = async (newAchievement) => {
     throw new Error("Achievement not added");
   }
 }
+
+export const getAchievement = async (id) => {
+  const { data, error } = await supabase
+    .from("achievements")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Achievement not found");
+  }
+  return data;
+}

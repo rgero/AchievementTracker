@@ -1,15 +1,19 @@
+import { HiEye, HiTrash } from "react-icons/hi2";
+
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { HiTrash } from "react-icons/hi2";
 import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
 import Table from "../../ui/Table"
 import { format } from "date-fns";
 import { useDeleteAchievement } from "./hooks/useDeleteAchievement";
+import { useNavigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const AchievementRow = ({achievement}) => {
   const {isDeleting, deleteAchievement} = useDeleteAchievement();
   const {id, ownerID, name, weight, date} = achievement;
+
+  const navigate = useNavigate();
 
   const deleteID = id + "_" + ownerID;
   return (
@@ -21,8 +25,10 @@ const AchievementRow = ({achievement}) => {
         <Modal>
           <Menus.Menu>
             <Menus.Toggle id={deleteID} />
-
             <Menus.List id={deleteID}>
+              <Menus.Button icon={<HiEye />} onClick={() => navigate(`/achievements/${id}`)}>
+                See Details
+              </Menus.Button>
               <Modal.Open opens="delete">
                 <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
               </Modal.Open>

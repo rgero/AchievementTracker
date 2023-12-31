@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 import Account from "./pages/Account";
@@ -14,6 +14,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import SignupPage from "./pages/SignupPage"
 import { Toaster } from "react-hot-toast"
+import ViewAchievementPage from "./pages/ViewAchievementPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ const App = () => {
               }>
                 <Route path='account' element={<Account/>} />
                 <Route path="dashboard" element={<DashboardPage/>}/>
+                <Route path="achievements/:achievementID" element={<ViewAchievementPage/>}/>
                 <Route path='dummy' element={<DummyPage/>} />
               </Route>
               <Route index element={<LandingPage/>} />
