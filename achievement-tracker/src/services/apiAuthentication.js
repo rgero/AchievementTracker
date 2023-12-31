@@ -28,6 +28,21 @@ export const login = async ({email, password}) => {
   return data;
 }
 
+export const signInWithGoogle = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: '/dashboard'
+      }
+  })
+
+  if (error)
+  {
+    throw new Error(error.message);
+  }
+  return data;
+}
+
 export const getCurrentUser = async () => {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;

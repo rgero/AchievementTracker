@@ -1,6 +1,8 @@
+import Button from "../styles/Button";
 import Heading from "../ui/Heading"
 import LoginForm from "../features/authentication/LoginForm";
 import styled from "styled-components";
+import { useGoogleLogin } from "../features/authentication/hooks/useGoogleLogin";
 
 const LoginLayout = styled.main`
   min-height: 100vh;
@@ -13,10 +15,14 @@ const LoginLayout = styled.main`
 `;
 
 const Login = () => {
+  const {login, isLoading} = useGoogleLogin();
   return (
     <LoginLayout>
         <Heading as='h4'>Log into your account</Heading>
         <LoginForm/>
+        <Button disabled={isLoading} onClick={login}>
+          Log in with Google
+        </Button>
     </LoginLayout>
   )
 }
