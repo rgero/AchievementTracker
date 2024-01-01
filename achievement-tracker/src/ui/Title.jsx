@@ -39,7 +39,7 @@ const StyledNavLink = styled(NavLink)`
 
 const Title = ({children}) => {
   return (
-    <StyledNavLink>
+    <StyledNavLink to='/dashboard'>
       {children}
     </StyledNavLink>
   )
