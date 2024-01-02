@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 import Account from "./pages/Account";
@@ -37,12 +37,13 @@ const App = () => {
                   <AppLayout/>
                 </ProtectedRoute>
               }>
+                <Route index element={<Navigate replace to="dashboard"/>}/>
                 <Route path='account' element={<Account/>} />
                 <Route path="dashboard" element={<DashboardPage/>}/>
                 <Route path="achievements/:achievementID" element={<ViewAchievementPage/>}/>
                 <Route path='dummy' element={<DummyPage/>} />
               </Route>
-              <Route index element={<LandingPage/>} />
+              <Route path="landing" element={<LandingPage/>} />
               <Route path='login' element={<Login/>} />
               <Route path='signup' element={<SignupPage/>} />
               <Route path='*' element={<PageNotFound/>} />

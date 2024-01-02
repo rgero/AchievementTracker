@@ -21,7 +21,7 @@ const ProtectedRoute = ({children}) => {
   useEffect( ()=> {
     if (!isAuthenicated && !isLoading && fetchStatus !== "fetching")
     {
-      navigate('/');
+      navigate('/landing');
     }
   }, [isAuthenicated, isLoading, fetchStatus, navigate])
 
