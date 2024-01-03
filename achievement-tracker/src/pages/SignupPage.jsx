@@ -1,6 +1,8 @@
+import Button from "../styles/Button";
 import Heading from "../ui/Heading"
 import SignupForm from "../features/authentication/SignupForm"
 import styled from "styled-components";
+import { useGoogleLogin } from "../features/authentication/hooks/useGoogleLogin";
 
 const SignUpLayout = styled.main`
   min-height: 100vh;
@@ -20,12 +22,16 @@ const SignUpLayout = styled.main`
 `;
 
 const SignUpPage = () => {
-    return (
-        <SignUpLayout>
-            <Heading as="h1">Create a new account</Heading>
-            <SignupForm/>
-        </SignUpLayout>
-    )
+  const {login, isLoading} = useGoogleLogin();
+  return (
+      <SignUpLayout>
+          <Heading as="h1">Create a new account</Heading>
+          <SignupForm/>
+          <Button disabled={isLoading} onClick={login}>
+            Create Account with Google
+          </Button>
+      </SignUpLayout>
+  )
 }
 
 export default SignUpPage
