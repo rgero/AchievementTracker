@@ -7,7 +7,8 @@ import Tag from "../../styles/Tag";
 import styled from "styled-components";
 import { useAchievement } from "./hooks/useAchievement";
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useNavigate } from "react-router-dom";
+import { parseDate } from "../../helpers/parseDate";
+import { format } from "date-fns";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -31,6 +32,8 @@ const AchievementDetail = () => {
 
 
   const {id, weight, name, description, date} = achievement;
+  const correctedDate = parseDate(date);
+
   return (
     <>
       <Row type="horizontal">
@@ -45,7 +48,7 @@ const AchievementDetail = () => {
         <div>{name}</div>
       </Row>
       <Row>{description}</Row>
-      <Row>{date}</Row>
+      <Row>{format(correctedDate, 'yyyy-MM-dd')}</Row>
     </>
   )
 }

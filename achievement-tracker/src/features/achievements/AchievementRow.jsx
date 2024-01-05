@@ -7,11 +7,13 @@ import Table from "../../ui/Table"
 import { format } from "date-fns";
 import { useDeleteAchievement } from "./hooks/useDeleteAchievement";
 import { useNavigate } from "react-router-dom";
+import { parseDate } from "../../helpers/parseDate";
 
 /* eslint-disable react/prop-types */
 const AchievementRow = ({achievement}) => {
   const {isDeleting, deleteAchievement} = useDeleteAchievement();
   const {id, ownerID, name, weight, date} = achievement;
+  const correctedDate = parseDate(date);
 
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ const AchievementRow = ({achievement}) => {
   return (
     <Table.Row>
       <span>{name}</span>
-      <span>{format(date, 'yyyy-MM-dd')}</span>
+      <span>{format(correctedDate, 'yyyy-MM-dd')}</span>
       <span>{weight}</span>
       <div>
         <Modal>
