@@ -1,12 +1,16 @@
 import Button from "../../styles/Button";
+import ButtonGroup from "../../styles/ButtonGroup";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 import Empty from "../../ui/Empty";
 import Heading from "../../ui/Heading";
+import Modal from "../../ui/Modal";
 import Row from "../../styles/Row";
 import Spinner from "../../ui/Spinner";
 import { format } from "date-fns";
 import { parseDate } from "../../helpers/parseDate";
 import styled from "styled-components";
 import { useAchievement } from "./hooks/useAchievement";
+import { useDeleteAchievement } from "./hooks/useDeleteAchievement";
 import { useMoveBack } from "../../hooks/useMoveBack";
 
 const StyledAchievement = styled.section`
@@ -52,12 +56,6 @@ const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
 `;
 
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 1.2rem;
-  justify-content: flex-end;
-`;
-
 const DetailRow = styled(Row)`
   padding-bottom: 50px;
 `
@@ -65,13 +63,19 @@ const DetailRow = styled(Row)`
 
 const AchievementDetail = () => {
   const {achievement, isLoading} = useAchievement();
+  const {deleteAchievement, isDeleting} = useDeleteAchievement();
   const moveBack = useMoveBack();
   
   if (isLoading) return <Spinner/>;
   if (!achievement) return <Empty resource="achievement"/>
 
-  const {weight, name, description, date} = achievement;
+  const {id, weight, name, description, date} = achievement;
   const correctedDate = parseDate(date);
+
+  const handleDelete = () => {
+    deleteAchievement(id);
+    moveBack();
+  }
 
   return (
     <>  
@@ -95,11 +99,28 @@ const AchievementDetail = () => {
           </DetailRow>
         </Section>
       </StyledAchievement>
-      <ButtonGroup>
-        <Button variation="secondary" onClick={moveBack}>
-              Back
-        </Button>
-      </ButtonGroup>
+      <Modal>
+        <ButtonGroup>
+          <Modal.Open opens="delete">
+            <Button variation="danger">
+              Delete
+            </Button>
+          </Modal.Open>
+
+          <Button variation="secondary" onClick={moveBack}>
+            Back
+          </Button>
+        </ButtonGroup>
+
+        <Modal.Window name="delete">
+          <ConfirmDelete
+            resourceName="achievement"
+            disabled={isDeleting}
+            onConfirm={handleDelete}
+          />
+        </Modal.Window>
+        
+      </Modal>
     </>
   )
 }

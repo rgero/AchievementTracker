@@ -5,9 +5,10 @@ import Heading from "./Heading";
 import styled from "styled-components";
 
 const StyledConfirmDelete = styled.div`
-  width: 40rem;
+  width: 50rem;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 1.2rem;
 
   & p {
