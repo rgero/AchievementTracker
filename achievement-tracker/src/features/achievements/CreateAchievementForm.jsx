@@ -13,14 +13,14 @@ import { useUser } from "../authentication/hooks/useUser";
 
 const CreateAchievementForm = ({onCloseModal}) => {
   const { control, register, handleSubmit, reset, formState } = useForm({
-    defaultValues: {},
+    defaultValues: { weight: "Low" },
   });
   const errors = formState.errors;
 
   const {isWorking, addAchievement} = useAddAchievement();
   const {user} = useUser();
 
-  const weightOptions = [{value: "low", label: "Low"}, {value: "Medium", label: "Medium"}, {value: "High", label: "High"},]
+  const weightOptions = [{value: "Low", label: "Low"}, {value: "Medium", label: "Medium"}, {value: "High", label: "High"},]
 
   const onSubmit = (data) => {
     data = {...data, owner_id: user.id}
