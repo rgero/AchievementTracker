@@ -7,6 +7,7 @@ import Form from "../../ui/forms/Form";
 import FormRow from "../../ui/forms/FormRow";
 import Input from "../../styles/Input";
 import Select from "../../ui/Select";
+import TextArea from "../../styles/TextArea";
 import { useAddAchievement } from "./hooks/useAddAchievement";
 import { useUser } from "../authentication/hooks/useUser";
 
@@ -50,8 +51,8 @@ const CreateAchievementForm = ({onCloseModal}) => {
       </FormRow>
 
       <FormRow label="Description" errors={errors?.description?.message}>
-        <Input
-          type="text"
+        <TextArea
+          type="textarea"
           id="description"
           disabled={isWorking}
           {...register("description")}
