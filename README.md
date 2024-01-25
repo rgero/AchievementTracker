@@ -2,6 +2,8 @@
 ---
 An app that acts like my Note in iCloud that tracks my personal achievements (such as paying off my student loans, reading 45 books, participating in GameJams, etc).
 
+Currently Deployed to - https://achievement-tracker.vercel.app/landing
+
 ### What is the data needed for an entry?
 - The date of the accomplishment
 - Title of the Accomplishment
