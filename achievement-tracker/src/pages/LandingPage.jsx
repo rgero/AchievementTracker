@@ -2,7 +2,7 @@ import Button from "../styles/Button";
 import Card from "../ui/Card";
 import background from '../assets/background.jpg';
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom"
+import { useGoogleLogin } from "../features/authentication/hooks/useGoogleLogin";
 
 const StyledLandingPage = styled.div`
   height: 100vh;
@@ -14,12 +14,8 @@ const StyledLandingPage = styled.div`
   justify-content: center;
 `;
 
-const StyledButton = styled(Button)`
-  margin: 1rem;
-`
-
 const LandingPage = () => {
-  const navigate = useNavigate();
+  const {login, isLoading} = useGoogleLogin();
   return (
     <StyledLandingPage>
       <Card>
@@ -28,8 +24,9 @@ const LandingPage = () => {
           Welcome to the Achievement Tracker. <br/>A website meant for you to easily remember your accomplishements.
         </Card.Body>
         <Card.Footer>
-          <StyledButton onClick={()=> navigate('/signup')}>Create new account</StyledButton>
-          <StyledButton onClick={()=> navigate('/login')}>Login</StyledButton>
+          <Button disabled={isLoading} onClick={login}>
+            Log in with Google
+          </Button>
         </Card.Footer>
       </Card>
 
