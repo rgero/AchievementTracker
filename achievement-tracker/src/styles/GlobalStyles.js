@@ -24,8 +24,8 @@ const GlobalStyles = createGlobalStyle`
   --color-yellow-700: #a16207;
   --color-silver-100: #e5e7eb;
   --color-silver-700: #374151;
-  --color-indigo-100: #e0e7ff;
-  --color-indigo-700: #4338ca;
+  --color-green-100: #a7d8bf;
+  --color-green-700: #06783f;
 
   --color-red-100: #fee2e2;
   --color-red-700: #b91c1c;
@@ -63,8 +63,8 @@ const GlobalStyles = createGlobalStyle`
 --color-yellow-700: #fef9c3;
 --color-silver-100: #374151;
 --color-silver-700: #f3f4f6;
---color-indigo-100: #3730a3;
---color-indigo-700: #e0e7ff;
+--color-green-100: #06783f;
+--color-green-700: #a7d8bf;
 
 --color-red-100: #fee2e2;
 --color-red-700: #b91c1c;
@@ -80,15 +80,15 @@ const GlobalStyles = createGlobalStyle`
 --image-opacity: 90%;
   }
   
-  /* Indigo */
+  /* green */
   --color-brand-50: #eef2ff;
   --color-brand-100: #e0e7ff;
   --color-brand-200: #c7d2fe;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  --color-brand-500: #20D47D;
+  --color-brand-600: #18B96B;
+  --color-brand-700: #099250;
+  --color-brand-800: #0C894C;
+  --color-brand-900: #043F22;
   
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;
