@@ -4,14 +4,19 @@ import styled from "styled-components"
 const StyledCard = styled.div`
   display:flex;
   flex-direction: column;
-  width: 40%;
-  height: 40%;
   background-color: var(--color-silver-100);
+  width: 80%;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  @media only screen and (min-width: 500)
+  {
+    width: 40%;
+    height: 40%;
+  }
 `
 
 const StyledHeader = styled.header`

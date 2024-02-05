@@ -8,7 +8,7 @@ const StyledNavLink = styled(NavLink)`
     align-items: center;
     
     color: var(--color-grey-600);
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 700;
     transition: all 0.3s;
   }
@@ -34,6 +34,19 @@ const StyledNavLink = styled(NavLink)`
   &.active:link svg,
   &.active:visited svg {
     color: var(--color-brand-600);
+  }
+
+  @media only screen and (min-width: 500)
+  {
+    &:visited {
+      display: flex;
+      align-items: center;
+      
+      color: var(--color-grey-600);
+      font-size: 2.5rem;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
   }
 `;
 

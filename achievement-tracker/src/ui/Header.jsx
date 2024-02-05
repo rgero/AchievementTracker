@@ -6,10 +6,17 @@ import styled from "styled-components"
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
   border-bottom: 1px solid var(--color-grey-100);
-  padding: 1.2rem 4.8rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 10px;
+
+  @media only screen and (min-width: 500)
+  {
+    padding: 1.2rem 4.8rem;
+  }
+
 `;
 
 const StyledUser = styled.header`

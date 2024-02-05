@@ -1,13 +1,14 @@
 import { HiEye, HiTrash } from "react-icons/hi2";
+import { useEffect, useState } from "react";
 
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
 import Table from "../../ui/Table"
 import { format } from "date-fns";
+import { parseDate } from "../../helpers/parseDate";
 import { useDeleteAchievement } from "./hooks/useDeleteAchievement";
 import { useNavigate } from "react-router-dom";
-import { parseDate } from "../../helpers/parseDate";
 
 /* eslint-disable react/prop-types */
 const AchievementRow = ({achievement}) => {
@@ -15,14 +16,25 @@ const AchievementRow = ({achievement}) => {
   const {id, ownerID, name, weight, date} = achievement;
   const correctedDate = parseDate(date);
 
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 500);
+  const updateMedia = () => {
+    setDesktop(window.innerWidth > 500);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
   const navigate = useNavigate();
 
   const deleteID = id + "_" + ownerID;
   return (
     <Table.Row>
       <span>{name}</span>
-      <span>{format(correctedDate, 'yyyy-MM-dd')}</span>
-      <span>{weight}</span>
+      {isDesktop && <>
+        <span>{format(correctedDate, 'yyyy-MM-dd')}</span>
+        <span>{weight}</span>
+      </>}
       <div>
         <Modal>
           <Menus.Menu>

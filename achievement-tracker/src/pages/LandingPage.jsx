@@ -5,11 +5,11 @@ import styled from "styled-components";
 import { useGoogleLogin } from "../features/authentication/hooks/useGoogleLogin";
 
 const StyledLandingPage = styled.div`
-  height: 100vh;
   background: url(${background});
   background-repeat: space;
   background-position: center;
   display: flex;
+  height: 100vh;
   align-items: center;
   justify-content: center;
 `;
