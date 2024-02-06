@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Sizes } from "../constants/sizes";
 import styled from "styled-components";
 
 const StyledNavLink = styled(NavLink)`
@@ -8,9 +9,14 @@ const StyledNavLink = styled(NavLink)`
     align-items: center;
     
     color: var(--color-grey-600);
-    font-size: 1.5rem;
+    font-size: 2.0rem;
     font-weight: 700;
     transition: all 0.3s;
+
+    @media only screen and (min-width: ${Sizes.minScreenSize}px)
+    {
+      font-size: 2.5rem;
+    }
   }
 
   /* This works because react-router places the active class on the active NavLink */
@@ -34,19 +40,6 @@ const StyledNavLink = styled(NavLink)`
   &.active:link svg,
   &.active:visited svg {
     color: var(--color-brand-600);
-  }
-
-  @media only screen and (min-width: 500)
-  {
-    &:visited {
-      display: flex;
-      align-items: center;
-      
-      color: var(--color-grey-600);
-      font-size: 2.5rem;
-      font-weight: 700;
-      transition: all 0.3s;
-    }
   }
 `;
 
