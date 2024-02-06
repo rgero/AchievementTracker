@@ -10,7 +10,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 1.2rem 1.2rem;
 
   @media only screen and (min-width: 500)
   {

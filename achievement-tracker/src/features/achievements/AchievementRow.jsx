@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
+import { Sizes } from "../../constants/sizes";
 import Table from "../../ui/Table"
 import { format } from "date-fns";
 import { parseDate } from "../../helpers/parseDate";
@@ -16,9 +17,9 @@ const AchievementRow = ({achievement}) => {
   const {id, ownerID, name, weight, date} = achievement;
   const correctedDate = parseDate(date);
 
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 500);
+  const [isDesktop, setDesktop] = useState(window.innerWidth > Sizes.minScreenSize);
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 500);
+    setDesktop(window.innerWidth > Sizes.minScreenSize);
   };
   useEffect(() => {
     window.addEventListener("resize", updateMedia);
@@ -32,8 +33,8 @@ const AchievementRow = ({achievement}) => {
     <Table.Row>
       <span>{name}</span>
       {isDesktop && <>
-        <span>{format(correctedDate, 'yyyy-MM-dd')}</span>
-        <span>{weight}</span>
+        <span style={{minWidth: 50, display: "flex", justifyContent: "center"}}>{format(correctedDate, 'yyyy-MM-dd')}</span>
+        <span style={{minWidth: 50, display: "flex", justifyContent: "flex-end"}}>{weight}</span>
       </>}
       <div>
         <Modal>
