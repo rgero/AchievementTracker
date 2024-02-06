@@ -1,19 +1,24 @@
 import Heading from "./Heading"
+import { Sizes } from "../constants/sizes";
 import styled from "styled-components"
 
 const StyledCard = styled.div`
   display:flex;
   flex-direction: column;
   background-color: var(--color-silver-100);
-  width: 80%;
+  width: 40%;
+  height: 40%;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-lg);
   align-items: center;
   justify-content: center;
   text-align: center;
 
-  @media only screen and (min-width: 500)
-  {
+  @media (max-width: ${Sizes.minScreenSize}px){
+    width: 80%;
+  }
+
+  @media (min-width: ${Sizes.minScreenSize}px){
     width: 40%;
     height: 40%;
   }
