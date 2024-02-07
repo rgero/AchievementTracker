@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 
+import { Sizes } from "../../constants/sizes";
 import styled from "styled-components";
 
 const StyledFormRow = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
   margin: auto;
   padding: 10px 0;
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${Sizes.minScreenSize}px) {
 
     display: grid;
     flex-direction: row;

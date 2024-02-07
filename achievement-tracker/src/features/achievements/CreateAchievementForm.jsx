@@ -7,7 +7,7 @@ import Form from "../../ui/forms/Form";
 import FormRow from "../../ui/forms/FormRow";
 import Input from "../../styles/Input";
 import Select from "../../ui/Select";
-import TextArea from "../../styles/TextArea";
+import TextArea from "../../ui/forms/TextArea";
 import { useAddAchievement } from "./hooks/useAddAchievement";
 import { useUser } from "../authentication/hooks/useUser";
 

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+import { Sizes } from "../constants/sizes";
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
@@ -15,6 +16,11 @@ const StyledSelect = styled.select`
   font-weight: 500;
   box-shadow: var(--shadow-sm);
   width: 300px;
+
+  
+  @media only screen and (max-width: ${Sizes.minScreenSize}px) {
+    width: 100%
+  }
 `;
 
 const Select = ({options, value, onChange, ...props}) => {

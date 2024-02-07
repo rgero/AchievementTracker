@@ -1,3 +1,4 @@
+import { Sizes } from "../constants/sizes";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -7,6 +8,10 @@ const Input = styled.input`
   padding: 0.8rem 1.2rem;
   box-shadow: var(--shadow-sm);
   width: 300px;
+
+  @media only screen and (max-width: ${Sizes.minScreenSize}px) {
+    width: 100%
+  }
 `;
 
 export default Input;

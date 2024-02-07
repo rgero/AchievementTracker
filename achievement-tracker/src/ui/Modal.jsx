@@ -3,6 +3,7 @@
 import { cloneElement, createContext, useContext, useState } from "react";
 
 import { HiXMark } from "react-icons/hi2";
+import { Sizes } from "../constants/sizes";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { useOutsideClick } from "../hooks/useOutsideClick";
@@ -17,6 +18,10 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
+
+  @media (max-width: ${Sizes.minScreenSize}px){
+    width: 80%;
+  }
 `;
 
 const Overlay = styled.div`

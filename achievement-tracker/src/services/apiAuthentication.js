@@ -32,7 +32,8 @@ export const signInWithGoogle = async () => {
   const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://achievement-tracker-git-main-roys-projects-60997102.vercel.app/dashboard'
+        //redirectTo: 'https://achievement-tracker-git-main-roys-projects-60997102.vercel.app/dashboard'
+        redirectTo: 'https://localhost:5173/dashboard'
       }
   })
 
