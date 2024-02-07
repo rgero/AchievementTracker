@@ -29,11 +29,11 @@ export const login = async ({email, password}) => {
 }
 
 export const signInWithGoogle = async () => {
+  console.log(import.meta.env.MODE)
   const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        //redirectTo: 'https://achievement-tracker-git-main-roys-projects-60997102.vercel.app/dashboard'
-        redirectTo: 'https://localhost:5173/dashboard'
+        redirectTo:  import.meta.env.VITE_REDIRECT_URL
       }
   })
 
