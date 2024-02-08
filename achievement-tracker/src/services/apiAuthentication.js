@@ -29,7 +29,6 @@ export const login = async ({email, password}) => {
 }
 
 export const signInWithGoogle = async () => {
-  console.log(import.meta.env.MODE)
   const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {

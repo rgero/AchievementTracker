@@ -9,27 +9,42 @@ import Input from "../../styles/Input";
 import Select from "../../ui/Select";
 import TextArea from "../../ui/forms/TextArea";
 import { useAddAchievement } from "./hooks/useAddAchievement";
+import { useEditAchievement } from "./hooks/useEditAchievement";
 import { useUser } from "../authentication/hooks/useUser";
 
-const CreateAchievementForm = ({onCloseModal}) => {
+const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
+
+  const { id: editId, ...editValues} = achievement;
+  const isEditSession = Boolean(editId);
+
   const { control, register, handleSubmit, reset, formState } = useForm({
-    defaultValues: { weight: "Low" },
+    defaultValues: isEditSession ? editValues : { weight: "Low" },
   });
   const errors = formState.errors;
 
   const {isWorking, addAchievement} = useAddAchievement();
+  const {isEditing, editAchievement} = useEditAchievement();
   const {user} = useUser();
 
   const weightOptions = [{value: "Low", label: "Low"}, {value: "Medium", label: "Medium"}, {value: "High", label: "High"},]
 
   const onSubmit = (data) => {
     data = {...data, owner_id: user.id}
-    addAchievement(data, 
-      {onSuccess: () => {
+    if (isEditSession)
+    {
+      editAchievement({newAchievementData: {...data}, id: editId},
+        {onSuccess: () => {
           reset();
           onCloseModal?.();
-      }}
-    );
+        }});
+    } else {
+      addAchievement(data, 
+        {onSuccess: () => {
+            reset();
+            onCloseModal?.();
+        }}
+      );
+    }
   }
 
   const onError = (err) => {

@@ -3,17 +3,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addOrEditAchievement } from "../../../services/apiAchievements";
 import toast from "react-hot-toast";
 
-export const useAddAchievement = () => {
+export const useEditAchievement = () => {
     const queryClient = useQueryClient();
-    
-    const {mutate: addAchievement, isLoading: isWorking} = useMutation({
-        mutationFn: addOrEditAchievement,
+
+    const {mutate: editAchievement, isLoading: isEditing} = useMutation({
+        mutationFn: ({newAchievementData, id}) => {
+          addOrEditAchievement(newAchievementData, id)
+        },
         onSuccess: () => {
-            toast.success("New Achievement created!");
+            toast.success("Achievement Updated!");
             queryClient.invalidateQueries({queryKey: ['achievements']});
         },
         onError: (err) => {toast.error(err.message)}
     });
 
-    return {isWorking, addAchievement};
+    return {isEditing, editAchievement};
 }

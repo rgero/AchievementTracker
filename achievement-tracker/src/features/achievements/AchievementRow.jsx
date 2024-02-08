@@ -1,7 +1,8 @@
-import { HiEye, HiTrash } from "react-icons/hi2";
+import { HiEye, HiPencil, HiTrash } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import CreateAchievementForm from "./CreateAchievementForm";
 import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
 import { Sizes } from "../../constants/sizes";
@@ -44,11 +45,19 @@ const AchievementRow = ({achievement}) => {
               <Menus.Button icon={<HiEye />} onClick={() => navigate(`/achievements/${id}`)}>
                 See Details
               </Menus.Button>
+              <Modal.Open opens="edit">
+                    <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
               <Modal.Open opens="delete">
                 <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
               </Modal.Open>
             </Menus.List>
           </Menus.Menu>
+
+          <Modal.Window name="edit">
+            <CreateAchievementForm achievement={achievement} />
+          </Modal.Window>
+
           <Modal.Window name="delete">
               <ConfirmDelete
                 resourceName="achievements"
