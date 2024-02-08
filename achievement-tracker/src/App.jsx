@@ -8,11 +8,9 @@ import DashboardPage from "./pages/DashboardPage";
 import DummyPage from "./pages/DummyPage"
 import GlobalStyles from "./styles/GlobalStyles"
 import LandingPage from "./pages/LandingPage";
-import Login from "./pages/LoginPage"
 import PageNotFound from "./pages/PageNotFound"
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import SignupPage from "./pages/SignupPage"
 import { Toaster } from "react-hot-toast"
 import ViewAchievementPage from "./pages/ViewAchievementPage";
 
@@ -44,8 +42,6 @@ const App = () => {
                 <Route path='dummy' element={<DummyPage/>} />
               </Route>
               <Route path="landing" element={<LandingPage/>} />
-              <Route path='login' element={<Login/>} />
-              <Route path='signup' element={<SignupPage/>} />
               <Route path='*' element={<PageNotFound/>} />
             </Routes>
           </BrowserRouter>

@@ -8,9 +8,7 @@ const DashboardPage = () => {
     <>
       <Row type="horizontal">
         <Heading as="h1">Dashboard</Heading>
-        <div>
-          <AddAchievement/>
-        </div>
+        <AddAchievement/>
       </Row>
 
       <Row>
