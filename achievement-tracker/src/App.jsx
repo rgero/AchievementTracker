@@ -5,7 +5,6 @@ import Account from "./pages/Account";
 import AppLayout from "./ui/AppLayout"
 import { DarkModeProvider } from "./context/DarkModeContext"
 import DashboardPage from "./pages/DashboardPage";
-import DummyPage from "./pages/DummyPage"
 import GlobalStyles from "./styles/GlobalStyles"
 import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound"
@@ -39,7 +38,6 @@ const App = () => {
                 <Route path='account' element={<Account/>} />
                 <Route path="dashboard" element={<DashboardPage/>}/>
                 <Route path="achievements/:achievementID" element={<ViewAchievementPage/>}/>
-                <Route path='dummy' element={<DummyPage/>} />
               </Route>
               <Route path="landing" element={<LandingPage/>} />
               <Route path='*' element={<PageNotFound/>} />

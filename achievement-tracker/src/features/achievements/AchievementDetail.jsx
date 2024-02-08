@@ -15,7 +15,7 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 
 const StyledAchievement = styled.section`
   /* Box */
-  background-color: var(--color-grey-0);
+  background-color: var(color-green-700);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
 
@@ -23,7 +23,7 @@ const StyledAchievement = styled.section`
 `;
 
 const Header = styled.header`
-  background-color: var(--color-brand-500);
+  background-color: var(--color-green-700);
   padding: 2rem 4rem;
   color: #e0e7ff;
   font-size: 1.8rem;
