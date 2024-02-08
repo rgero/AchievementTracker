@@ -2,6 +2,7 @@
 
 import Button from "../styles/Button";
 import Heading from "./Heading";
+import { Sizes } from "../constants/sizes";
 import styled from "styled-components";
 
 const StyledConfirmDelete = styled.div`
@@ -20,6 +21,10 @@ const StyledConfirmDelete = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
+  }
+
+  @media (max-width: ${Sizes.minScreenSize}px){
+    width: 80%;
   }
 `;
 
