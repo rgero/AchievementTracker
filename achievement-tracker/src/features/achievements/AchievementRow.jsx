@@ -31,7 +31,7 @@ const AchievementRow = ({achievement}) => {
       weightString = "High"
       break;
     default:
-      console.log(`Sorry, we are out of ${expr}.`);
+      weightString = "Low";
   } 
 
 
