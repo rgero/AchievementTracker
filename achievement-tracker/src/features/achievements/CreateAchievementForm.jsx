@@ -18,7 +18,7 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
   const isEditSession = Boolean(editId);
 
   const { control, register, handleSubmit, reset, formState } = useForm({
-    defaultValues: isEditSession ? editValues : { weight: "Low" },
+    defaultValues: isEditSession ? editValues : { weight: 1 },
   });
   const errors = formState.errors;
 
@@ -26,10 +26,11 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
   const {isEditing, editAchievement} = useEditAchievement();
   const {user} = useUser();
 
-  const weightOptions = [{value: "Low", label: "Low"}, {value: "Medium", label: "Medium"}, {value: "High", label: "High"},]
+  const weightOptions = [{value: 1, label: "Low"}, {value: 2, label: "Medium"}, {value: 3, label: "High"},]
 
   const onSubmit = (data) => {
     data = {...data, owner_id: user.id}
+    console.log(data.weight);
     if (isEditSession)
     {
       editAchievement({newAchievementData: {...data}, id: editId},

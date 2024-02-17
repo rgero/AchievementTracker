@@ -5,7 +5,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import CreateAchievementForm from "./CreateAchievementForm";
 import Menus from "../../ui/Menus";
 import Modal from "../../ui/Modal";
-import { Sizes } from "../../constants/sizes";
+import { Sizes } from "../../utils/constants";
 import Table from "../../ui/Table"
 import { format } from "date-fns";
 import { parseDate } from "../../helpers/parseDate";
@@ -17,6 +17,23 @@ const AchievementRow = ({achievement}) => {
   const {isDeleting, deleteAchievement} = useDeleteAchievement();
   const {id, ownerID, name, weight, date} = achievement;
   const correctedDate = parseDate(date);
+
+  // Convert weight to String
+  let weightString;
+  switch (weight) {
+    case 1:
+      weightString = "Low"
+      break;
+    case 2:
+      weightString = "Medium"
+      break;
+    case 3:
+      weightString = "High"
+      break;
+    default:
+      console.log(`Sorry, we are out of ${expr}.`);
+  } 
+
 
   const [isDesktop, setDesktop] = useState(window.innerWidth > Sizes.minScreenSize);
   const updateMedia = () => {
@@ -35,7 +52,7 @@ const AchievementRow = ({achievement}) => {
       <span>{name}</span>
       {isDesktop && <>
         <span style={{minWidth: 50, display: "flex", justifyContent: "center"}}>{format(correctedDate, 'yyyy-MM-dd')}</span>
-        <span style={{minWidth: 50, display: "flex", justifyContent: "flex-end"}}>{weight}</span>
+        <span style={{minWidth: 50, display: "flex", justifyContent: "flex-end"}}>{weightString}</span>
       </>}
       <div>
         <Modal>

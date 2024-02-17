@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Sizes } from "../constants/sizes";
+import { Sizes } from "../utils/constants";
 import styled from "styled-components";
 
 const StyledSelect = styled.select`

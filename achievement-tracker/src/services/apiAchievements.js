@@ -1,10 +1,21 @@
+import { ENTRIES_PER_PAGE } from "../utils/constants";
 import supabase from "./supabase";
 
-export const getAchievements = async () => {
-  let { data, error, count } = await supabase
-    .from('achievements')
-    .select('*')
+export const getAchievements = async ({sortBy, page}) => {
+  let query = supabase.from('achievements').select('*', {count: "exact"})
+  
+  if (sortBy)
+  {
+    query = query.order(sortBy.field, {ascending: sortBy.direction === "asc"})
+  }
 
+  if (page){
+    const from = ENTRIES_PER_PAGE * (page-1);
+    const to = from + ENTRIES_PER_PAGE - 1;
+    query = query.range(from, to);
+  }
+
+  const {data, error, count} = await query;
   if (error) {
     console.error(error);
     throw new Error("Achievements not found");

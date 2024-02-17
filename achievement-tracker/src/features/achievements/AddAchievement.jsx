@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "../../styles/Button"
 import CreateAchievementForm from "./CreateAchievementForm"
 import Modal from "../../ui/Modal"
-import { Sizes } from "../../constants/sizes";
+import { Sizes } from "../../utils/constants";
 
 const AddAchievement = () => {
 

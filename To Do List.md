@@ -14,5 +14,6 @@ I've worked a bit on the functionality of this project, enabling the edit proces
 -- This might be a thing I need a separate form for. I'm not sure how it'd look on mobile.
 
 **Notes on 2024-02-17**
-- [ ] Add the ability to sort the achievements by Date or Priority on Desktop
-- [ ] Add the ability to sort the achievements by Date or Priority on Mobile
+- [x] Add the ability to sort the achievements by Date or Priority on Desktop
+- [x] Add the ability to sort the achievements by Date or Priority on Mobile
+- [x] Add the pagination.

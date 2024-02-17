@@ -2,7 +2,7 @@
 
 import Button from "../styles/Button";
 import Heading from "./Heading";
-import { Sizes } from "../constants/sizes";
+import { Sizes } from "../utils/constants";
 import styled from "styled-components";
 
 const StyledConfirmDelete = styled.div`

@@ -3,7 +3,7 @@
 import { cloneElement, createContext, useContext, useState } from "react";
 
 import { HiXMark } from "react-icons/hi2";
-import { Sizes } from "../constants/sizes";
+import { Sizes } from "../utils/constants";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { useOutsideClick } from "../hooks/useOutsideClick";

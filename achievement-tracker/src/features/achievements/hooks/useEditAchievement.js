@@ -11,8 +11,8 @@ export const useEditAchievement = () => {
           addOrEditAchievement(newAchievementData, id)
         },
         onSuccess: () => {
-            toast.success("Achievement Updated!");
             queryClient.invalidateQueries({queryKey: ['achievements']});
+            toast.success("Achievement Updated!");
         },
         onError: (err) => {toast.error(err.message)}
     });

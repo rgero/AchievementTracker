@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Sizes } from "../constants/sizes";
+import { Sizes } from "../utils/constants";
 import styled from "styled-components";
 
 const StyledNavLink = styled(NavLink)`

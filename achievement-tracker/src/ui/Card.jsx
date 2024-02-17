@@ -1,5 +1,5 @@
 import Heading from "./Heading"
-import { Sizes } from "../constants/sizes";
+import { Sizes } from "../utils/constants";
 import styled from "styled-components"
 
 const StyledCard = styled.div`

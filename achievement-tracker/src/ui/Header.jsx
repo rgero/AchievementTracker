@@ -1,5 +1,5 @@
 import HeaderMenu from "./HeaderMenu";
-import { Sizes } from "../constants/sizes";
+import { Sizes } from "../utils/constants";
 import Title from "./Title";
 import UserAvatar from "../features/authentication/UserAvatar";
 import styled from "styled-components"
