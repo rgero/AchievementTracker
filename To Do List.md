@@ -1,5 +1,5 @@
 # To Do List
- - [ ] Update the Styling to be more of what I like
+ - [x] Update the Styling to be more of what I like
 - [x] Add the ability to edit achievements - First draft of this is done now. I want to play around more to make sure that it's good.
 - [x] Update the styling to work better on Mobile Devices. - First cut of this is done now.
 - [x] Improve the deployment. - I think I got this figured out.
@@ -12,3 +12,7 @@ I've worked a bit on the functionality of this project, enabling the edit proces
 - Sort the achievements based on Date (asc/des), or priority
 - Filter the achievements based on criteria (Start/End dates, priorities, or search text)
 -- This might be a thing I need a separate form for. I'm not sure how it'd look on mobile.
+
+**Notes on 2024-02-17**
+- [ ] Add the ability to sort the achievements by Date or Priority on Desktop
+- [ ] Add the ability to sort the achievements by Date or Priority on Mobile
