@@ -7,6 +7,7 @@ import Pagination from "../../ui/Pagination";
 import { Sizes } from "../../utils/constants";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
+import { isBefore } from "date-fns";
 import { useAchievements } from "./hooks/useAchievements";
 import { useSearchParams } from "react-router-dom";
 
@@ -26,13 +27,29 @@ const AchievementTable = () => {
   if (isLoading) return <Spinner />;
   if (achievements.length === 0) return <Empty resourceName="bookings"/>
 
-    // Sort the achievements
-    const sortBy = searchParams.get('sortBy') || 'name-asc';
-    const [field, direction] = sortBy.split('-');
-    const modifier = direction === 'asc' ? 1 : -1;
-    const sortedAchievements = field === "name"
-      ? achievements?.sort((a, b) => a.name.localeCompare(b.name) * modifier)
-      : achievements?.sort((a, b) => (a[field] - b[field]) * modifier);
+  // Sort the achievements
+  const sortBy = searchParams.get('sortBy') || 'name-asc';
+  const [field, direction] = sortBy.split('-');
+  const modifier = direction === 'asc' ? 1 : -1;
+
+  // Need to sort these better.
+  let sortedAchievements = achievements;
+
+  switch(field)
+  {
+    case "name":
+      sortedAchievements = achievements?.sort((a, b) => a.name.localeCompare(b.name) * modifier);
+      break;
+    case "date":
+      sortedAchievements = achievements?.sort((a, b) => {
+        return isBefore(new Date(a), new Date(b)) * modifier;
+      });
+      break;     
+    default:
+      sortedAchievements = achievements?.sort((a, b) => a[field] - b[field] * modifier);
+      break;
+  }
+  
 
   let columns = '4fr 1fr 0.25fr 0.25fr';
   if (!isDesktop) {
