@@ -10,7 +10,7 @@ export const useAchievements = () => {
   const [searchParams] = useSearchParams();
 
   // SORT
-  const sortByRaw = searchParams.get('sortBy') || 'date-desc';
+  const sortByRaw = searchParams.get('sortBy') || 'date-des';
   const [field, direction] = sortByRaw.split('-');
   const sortBy = {field, direction}
 
