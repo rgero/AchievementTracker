@@ -1,6 +1,6 @@
+import { DefaultSort, ENTRIES_PER_PAGE } from "../../../utils/constants";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { ENTRIES_PER_PAGE } from "../../../utils/constants";
 import { getAchievements } from "../../../services/apiAchievements";
 import { useSearchParams } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export const useAchievements = () => {
   const [searchParams] = useSearchParams();
 
   // SORT
-  const sortByRaw = searchParams.get('sortBy') || 'date-des';
+  const sortByRaw = searchParams.get('sortBy') || DefaultSort;
   const [field, direction] = sortByRaw.split('-');
   const sortBy = {field, direction}
 

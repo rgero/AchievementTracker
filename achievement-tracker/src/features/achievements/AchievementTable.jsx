@@ -7,6 +7,7 @@ import Pagination from "../../ui/Pagination";
 import { Sizes } from "../../utils/constants";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
+import TableHeader from "../../ui/TableHeader";
 import { useAchievements } from "./hooks/useAchievements";
 
 const AchievementTable = () => {
@@ -16,6 +17,7 @@ const AchievementTable = () => {
   const updateMedia = () => {
     setDesktop(window.innerWidth > Sizes.minScreenSize);
   };
+  
   useEffect(() => {
     window.addEventListener("resize", updateMedia);
     return () => window.removeEventListener("resize", updateMedia);
@@ -24,7 +26,7 @@ const AchievementTable = () => {
   if (isLoading) return <Spinner />;
   if (achievements.length === 0) return <Empty resourceName="bookings"/>
 
-  let columns = '4fr 1fr 0.25fr 0.25fr';
+  let columns = '4fr 1fr 0.4fr 0.25fr';
   if (!isDesktop) {
     columns = '4fr 0.25fr';
   }
@@ -33,10 +35,10 @@ const AchievementTable = () => {
     <Menus>
       <Table columns={columns}>
         <Table.Header>
-          <div>Name of Achievement</div>
+          <TableHeader id="name">Name of Achievement</TableHeader>
           {isDesktop && <>
-            <div style={{minWidth: 50, display: "flex", justifyContent: 'center'}}>Date</div>
-            <div style={{minWidth: 50, display: "flex", justifyContent: "flex-end"}}>Weight</div>
+            <TableHeader  id="date" style={{minWidth: 50, display: "flex", justifyContent: 'center'}}>Date</TableHeader>
+            <TableHeader  id="weight" style={{minWidth: 50, display: "flex", justifyContent: "center"}}>Weight</TableHeader>
           </>}
         </Table.Header>
         <Table.Body 
