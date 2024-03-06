@@ -36,10 +36,10 @@ const AchievementTable = () => {
       <Table columns={columns}>
         <Table.Header>
           <TableHeader id="name">Name of Achievement</TableHeader>
-          {isDesktop && <>
-            <TableHeader  id="date" style={{minWidth: 50, display: "flex", justifyContent: 'center'}}>Date</TableHeader>
-            <TableHeader  id="weight" style={{minWidth: 50, display: "flex", justifyContent: "center"}}>Weight</TableHeader>
-          </>}
+          {isDesktop && (<>
+            <TableHeader id="date" style={{minWidth: 50, display: "flex", justifyContent: 'center'}}>Date</TableHeader>
+            <TableHeader id="weight" style={{minWidth: 50, display: "flex", justifyContent: "center"}}>Weight</TableHeader>
+          </>)}
         </Table.Header>
         <Table.Body 
           data={achievements} 
