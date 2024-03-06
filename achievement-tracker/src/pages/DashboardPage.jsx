@@ -22,9 +22,6 @@ const DashboardPage = () => {
     <>
       <Row type="horizontal">
         <Heading as="h1">Dashboard</Heading>
-        {isDesktop && (
-          <AchievementTableOperations/>
-        )}
         <AddAchievement/>
       </Row>
       {!isDesktop && (
