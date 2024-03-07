@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
 import AchievementTable from "../features/achievements/AchievementTable"
-import AchievementTableOperations from "../features/achievements/AcheivementTableOperations"
 import AddAchievement from "../features/achievements/AddAchievement"
 import Heading from "../ui/Heading"
 import MobileOptions from "../ui/MobileOptions"
