@@ -21,6 +21,7 @@ const Search = () => {
         if (e.key === "Enter")
         {
           processSearch(e);
+          e.target.blur();
         }
       }}
     />
