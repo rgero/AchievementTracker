@@ -23,7 +23,7 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
   const errors = formState.errors;
 
   const {isWorking, addAchievement} = useAddAchievement();
-  const {isEditing, editAchievement} = useEditAchievement();
+  const {editAchievement} = useEditAchievement();
   const {user} = useUser();
 
   const weightOptions = [{value: 1, label: "Low"}, {value: 2, label: "Medium"}, {value: 3, label: "High"},]

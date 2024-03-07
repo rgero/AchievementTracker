@@ -92,7 +92,7 @@ const Row = ({children}) => {
 }
 
 const Body = ({data, render}) => {
-    if (!data.length) return <Empty>No Data</Empty>
+    if (!data.length) return <Empty resource="achievements"/>
     return (
         <StyledBody>
             {data.map(render)}

@@ -1,8 +1,13 @@
 import { ENTRIES_PER_PAGE } from "../utils/constants";
 import supabase from "./supabase";
 
-export const getAchievements = async ({sortBy, page}) => {
+export const getAchievements = async ({sortBy, searchBy, page}) => {
   let query = supabase.from('achievements').select('*', {count: "exact"})
+
+  if (searchBy)
+  {
+    query = query.ilike('name', `%${searchBy}%`)
+  }
   
   if (sortBy)
   {

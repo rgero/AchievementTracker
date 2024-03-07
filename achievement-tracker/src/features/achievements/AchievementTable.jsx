@@ -24,7 +24,7 @@ const AchievementTable = () => {
   });
 
   if (isLoading) return <Spinner />;
-  if (achievements.length === 0) return <Empty resourceName="bookings"/>
+  if (achievements.length === 0) return <Empty resource="achievements"/>
 
   let columns = '4fr 1fr 0.4fr 0.25fr';
   if (!isDesktop) {

@@ -14,20 +14,23 @@ export const useAchievements = () => {
   const [field, direction] = sortByRaw.split('-');
   const sortBy = {field, direction}
 
+  // SEARCH
+  const searchBy = searchParams.get('search') || "";
+
   // PAGES
   const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
 
   // This is cool, the filter input makes it a dependency like useEffect.
-  const {isLoading, data: {data: achievements, count} = {}, error} = useQuery({queryKey: ["achievements", sortBy, page], queryFn: () => getAchievements({sortBy, page})});
+  const {isLoading, data: {data: achievements, count} = {}, error} = useQuery({queryKey: ["achievements", sortBy, searchBy, page], queryFn: () => getAchievements({sortBy, searchBy, page})});
 
   // Pre-fetch some data
   const pageCount = Math.ceil(count / ENTRIES_PER_PAGE);
   if (page < pageCount) {
-    queryClient.prefetchQuery({queryKey: ["achievements", sortBy, page+1], queryFn: () => getAchievements({sortBy, page: page+1})})
+    queryClient.prefetchQuery({queryKey: ["achievements", sortBy, searchBy, page+1], queryFn: () => getAchievements({sortBy, searchBy, page: page+1})})
   }
   if (page > 1)
   {
-    queryClient.prefetchQuery({queryKey: ["achievements", sortBy, page-1], queryFn: () => getAchievements({sortBy, page: page-1})})
+    queryClient.prefetchQuery({queryKey: ["achievements", sortBy, searchBy, page-1], queryFn: () => getAchievements({sortBy, searchBy, page: page-1})})
   }
 
   return { isLoading, error, achievements, count };
