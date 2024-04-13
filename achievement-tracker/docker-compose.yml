@@ -1,0 +1,17 @@
+services:
+  achievement_tracker:
+    container_name: achievement_tracker
+    build:
+      context: .
+    networks:
+      - container-dmz
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./src:./src
+      - ./public:/public
+    restart: always
+
+networks:
+  container-dmz:
+    external: true
