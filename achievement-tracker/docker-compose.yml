@@ -5,6 +5,13 @@ services:
       context: .
     networks:
       - container-dmz
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.q.rule=Host(`achievements.roymond.net`)"
+      - "traefik.http.routers.q.entrypoints=websecure"
+      - "traefik.http.routers.q.tls.certresolver=letsencrypt"
+      - "traefik.http.services.q.loadbalancer.server.port=5555"
+      - "traefik.http.routers.q.middlewares=internal_only@file"
     ports:
       - "5555:5555"
     volumes:
