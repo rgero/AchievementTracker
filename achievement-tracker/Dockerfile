@@ -6,10 +6,10 @@ COPY package.json .
 
 RUN npm install
 
-COPY . .
+COPY . /achievement-tracker
 
-CMD [ "npm", "run", "build" ]
+RUN npm run build
 
 EXPOSE 5555
 
-CMD [ "npm", "run", "preview" ]
+CMD [ "npm", "run", "preview", "--https"]

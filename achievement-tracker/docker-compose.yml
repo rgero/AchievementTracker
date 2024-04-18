@@ -3,15 +3,17 @@ services:
     container_name: achievement-tracker
     build:
       context: .
+    env_file:
+      - .env
     networks:
       - container-dmz
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.q.rule=Host(`achievements.roymond.net`)"
-      - "traefik.http.routers.q.entrypoints=websecure"
-      - "traefik.http.routers.q.tls.certresolver=letsencrypt"
-      - "traefik.http.services.q.loadbalancer.server.port=5555"
-      - "traefik.http.routers.q.middlewares=internal_only@file"
+      - "traefik.http.routers.achievements.rule=Host(`achievements.roymond.net`)"
+      - "traefik.http.routers.achievements.entrypoints=https"
+      - "traefik.http.routers.achievements.middlewares=default@file"
+      - "traefik.http.routers.achievements.tls.certresolver=letsEncrypt"
+      - "traefik.http.services.achievements.loadbalancer.server.port=5555"
     ports:
       - "5555:5555"
     volumes:
