@@ -13,6 +13,10 @@ const StyledPageNotFound = styled.div`
   justify-content: center;
 `;
 
+const StyledRow = styled(Row)`
+  margin-top: 3rem;
+`
+
 const PageNotFound = () => {
   const navigate = useNavigate();
   return (
@@ -21,7 +25,9 @@ const PageNotFound = () => {
         <Row>
           The Page you are looking for has not been found.
         </Row>
-        <Row><Button onClick={()=> navigate("/")}>Click here to return</Button></Row>
+        <StyledRow>
+          <Button onClick={()=> navigate("/")}>Click here to return</Button>
+        </StyledRow>
       </StyledPageNotFound>
   )
 }
