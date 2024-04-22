@@ -8,6 +8,7 @@ import FormRow from "../../ui/forms/FormRow";
 import Input from "../../styles/Input";
 import Select from "../../ui/Select";
 import TextArea from "../../ui/forms/TextArea";
+import { formatDate } from "../../helpers/formatDate";
 import { useAddAchievement } from "./hooks/useAddAchievement";
 import { useEditAchievement } from "./hooks/useEditAchievement";
 import { useUser } from "../authentication/hooks/useUser";
@@ -18,7 +19,7 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
   const isEditSession = Boolean(editId);
 
   const { control, register, handleSubmit, reset, formState } = useForm({
-    defaultValues: isEditSession ? editValues : { weight: 1 },
+    defaultValues: isEditSession ? editValues : { weight: 1, date: formatDate(new Date()) },
   });
   const errors = formState.errors;
 
