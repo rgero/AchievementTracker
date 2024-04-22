@@ -30,7 +30,6 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
 
   const onSubmit = (data) => {
     data = {...data, owner_id: user.id}
-    console.log(data.weight);
     if (isEditSession)
     {
       editAchievement({newAchievementData: {...data}, id: editId},
@@ -59,6 +58,7 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
         <Input
           type="text"
           id="name"
+          autoFocus
           disabled={isWorking}
           {...register("name", {
             required: "This field is required",
