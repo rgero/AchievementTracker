@@ -23,7 +23,7 @@ const PageNotFound = () => {
       <StyledPageNotFound>
         <Heading as="h1">Page not found</Heading>
         <Row>
-          The Page you are looking for has not been found.
+          The page you are looking for has not been found.
         </Row>
         <StyledRow>
           <Button onClick={()=> navigate("/")}>Click here to return</Button>
