@@ -28,6 +28,16 @@ export const getAchievements = async ({sortBy, searchBy, page}) => {
   return {data, count};
 }
 
+export const getStatsAchievements = async () => {
+  let query = supabase.from('achievements').select('date,weight', {count: "exact"})
+  const {data, error, count} = await query;
+  if (error) {
+    console.error(error);
+    throw new Error("Achievements not found");
+  }
+  return {data, count};
+}
+
 export const getAchievement = async (id) => {
   const { data, error } = await supabase
     .from("achievements")
