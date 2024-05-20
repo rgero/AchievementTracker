@@ -43,6 +43,11 @@ const StyledList = styled.ul`
   top: ${(props) => props.position.y}px;
 `;
 
+const StyledHR = styled.hr`
+  color: var(--color-grey-700)
+  width: 80%
+`
+
 const StyledButton = styled.button`
   width: 100%;
   text-align: left;
@@ -139,9 +144,16 @@ const Button = ({ children, icon, onClick }) => {
   );
 }
 
+const Separator = () => {
+  return (
+    <StyledHR/> 
+  )
+}
+
 Menus.Menu = Menu;
 Menus.Toggle = Toggle;
 Menus.List = List;
 Menus.Button = Button;
+Menus.Separator = Separator;
 
 export default Menus;

@@ -1,31 +1,37 @@
-import ButtonIcon from "../styles/ButtonIcon";
-import DarkModeToggle from "./DarkModeToggle";
-import { HiOutlineUser } from "react-icons/hi2";
-import Logout from "../features/authentication/Logout";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { HiArrowRightOnRectangle, HiOutlineMoon, HiOutlineSun, HiOutlineUser } from "react-icons/hi2";
 
-const StyledHeaderMenu = styled.ul`
-  display: flex;
-  gap: 0.4rem;
-`;
+import Menus from "./Menus";
+import { TfiStatsUp } from "react-icons/tfi";
+import { useDarkMode } from "../context/DarkModeContext";
+import { useLogout } from "../features/authentication/hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 
 const HeaderMenu = () => {
   const navigate = useNavigate();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const {logout} = useLogout();
+  
   return (
-    <StyledHeaderMenu>
-      <li>
-        <ButtonIcon onClick={() => navigate("/account")}>
-          <HiOutlineUser />
-        </ButtonIcon>
-      </li>
-      <li>
-        <DarkModeToggle />
-      </li>
-      <li>
-        <Logout />
-      </li>
-    </StyledHeaderMenu>
+    <Menus>
+      <Menus.Menu>
+        <Menus.Toggle id="userMenu" />
+        <Menus.List id="userMenu">
+          <Menus.Button icon={<TfiStatsUp />} onClick={() => navigate(`/stats`)}>
+            View Stats
+          </Menus.Button>
+          <Menus.Separator/>
+          <Menus.Button icon={<HiOutlineUser />} onClick={() => navigate(`/account`)}>
+            Update User Info
+          </Menus.Button>
+          <Menus.Button icon={isDarkMode ? <HiOutlineSun /> : <HiOutlineMoon />} onClick={toggleDarkMode}>
+            Toggle {isDarkMode ? "Light" : "Dark"} Mode
+          </Menus.Button>
+          <Menus.Button icon={<HiArrowRightOnRectangle />} onClick={logout}>
+            Log out
+          </Menus.Button>
+        </Menus.List>
+      </Menus.Menu>
+    </Menus>
   );
 }
 
