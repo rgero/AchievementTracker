@@ -1,5 +1,11 @@
+# Feature Planning on May 19, 2024
+[ ] Add a stats page. Something that allows for a breakdown of year, weight, etc
+[ ] Add the ability to upload images?
+[ ] Add the ability to filter by date?
+
+
 # To Do List
- - [x] Update the Styling to be more of what I like
+- [x] Update the Styling to be more of what I like
 - [x] Add the ability to edit achievements - First draft of this is done now. I want to play around more to make sure that it's good.
 - [x] Update the styling to work better on Mobile Devices. - First cut of this is done now.
 - [x] Improve the deployment. - I think I got this figured out.

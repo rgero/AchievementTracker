@@ -10,6 +10,7 @@ import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound"
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import StatsPage from "./pages/StatsPage";
 import { Toaster } from "react-hot-toast"
 import ViewAchievementPage from "./pages/ViewAchievementPage";
 
@@ -37,6 +38,7 @@ const App = () => {
                 <Route index element={<Navigate replace to="dashboard"/>}/>
                 <Route path='account' element={<Account/>} />
                 <Route path="dashboard" element={<DashboardPage/>}/>
+                <Route path="stats" element={<StatsPage/>}/>
                 <Route path="achievements/:achievementID" element={<ViewAchievementPage/>}/>
               </Route>
               <Route path="landing" element={<LandingPage/>} />
