@@ -2,6 +2,7 @@
 
 import Spinner from '../../ui/Spinner';
 import Stats from './Stats';
+import WeightChart from './WeightChart';
 import styled from "styled-components";
 import { useStatsAchievements } from './hooks/useStatsAchievements';
 
@@ -21,6 +22,7 @@ const StatsLayout = () => {
   return (
     <StyledStatsLayout>
       <Stats achievements={achievements}/>
+      <WeightChart achievements={achievements}/>
     </StyledStatsLayout>
   )
 }
