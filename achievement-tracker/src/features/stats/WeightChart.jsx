@@ -33,17 +33,17 @@ const populateStartData = (isDarkMode) => {
     {
       weight: "Low",
       value: 0,
-      color: isDarkMode ? "#b91c1c": "#ef4444",
+      color: isDarkMode ? "#B64C00": "#EE6300",
     },
     {
       weight: "Medium",
       value: 0,
-      color: isDarkMode ? "#c2410c" : "#f97316",
+      color: isDarkMode ? "#454E96" : "#6D7CEE",
     },
     {
       weight: "High",
       value: 0,
-      color: isDarkMode ? "#a16207" : "#eab308",
+      color: isDarkMode ? "#10960C" : "#1AEE13",
     }
   ];
   

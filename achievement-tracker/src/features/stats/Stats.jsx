@@ -41,9 +41,9 @@ const Stats = ({achievements = []}) => {
     <StatsBox>
       <Heading as="h2">Priority Breakdown</Heading>
       <Stat title="Total" color="blue" icon={<GrAchievement/>} value={numAchievements}/>
-      <Stat title="Low" color="red" icon={<GrAchievement/>} value={separatedLists.low.length}/>
-      <Stat title="Medium" color="yellow" icon={<GrAchievement/>} value={separatedLists.medium.length}/>
-      <Stat title="High" color="green" icon={<GrAchievement/>} value={separatedLists.medium.length}/>
+      <Stat title="Low" icon={<GrAchievement/>} value={separatedLists.low.length}/>
+      <Stat title="Medium" icon={<GrAchievement/>} value={separatedLists.medium.length}/>
+      <Stat title="High" icon={<GrAchievement/>} value={separatedLists.medium.length}/>
     </StatsBox>
   )
 }
