@@ -1,7 +1,26 @@
 /* eslint-disable react/prop-types */
 
 import { GrAchievement } from "react-icons/gr";
+import Heading from "../../ui/Heading";
 import Stat from "./Stat"
+import styled from "styled-components";
+
+const StatsBox = styled.div`
+  /* Box */
+  background-color: var(--color-grey-0);
+  border: 1px solid var(--color-grey-100);
+  border-radius: var(--border-radius-md);
+
+  padding: 2.4rem 3.2rem;
+
+  & > *:first-child {
+    margin-bottom: 1.6rem;
+  }
+
+  & .recharts-pie-label-text {
+    font-weight: 600;
+  }
+`;
 
 const Stats = ({achievements = []}) => {
   const numAchievements = achievements.length;
@@ -19,12 +38,13 @@ const Stats = ({achievements = []}) => {
   }, {});
 
   return (
-    <>
+    <StatsBox>
+      <Heading as="h2">Priority Breakdown</Heading>
       <Stat title="Total" color="blue" icon={<GrAchievement/>} value={numAchievements}/>
       <Stat title="Low" color="red" icon={<GrAchievement/>} value={separatedLists.low.length}/>
       <Stat title="Medium" color="yellow" icon={<GrAchievement/>} value={separatedLists.medium.length}/>
       <Stat title="High" color="green" icon={<GrAchievement/>} value={separatedLists.medium.length}/>
-    </>
+    </StatsBox>
   )
 }
 

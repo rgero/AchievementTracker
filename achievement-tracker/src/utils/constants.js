@@ -1,5 +1,6 @@
 export const Sizes = {
-  minScreenSize: 768
+  minScreenSize: 768,
+  minStatsSize: 1100,
 }
 
 export const DefaultSort = "date-des";

@@ -2,6 +2,7 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import Heading from "../../ui/Heading";
+import { Sizes } from "../../utils/constants";
 import styled from "styled-components";
 import { useDarkMode } from "../../context/DarkModeContext";
 
@@ -12,7 +13,6 @@ const ChartBox = styled.div`
   border-radius: var(--border-radius-md);
 
   padding: 2.4rem 3.2rem;
-  grid-column: 1 / span 2;
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -21,6 +21,11 @@ const ChartBox = styled.div`
   & .recharts-pie-label-text {
     font-weight: 600;
   }
+
+  @media(max-width: ${Sizes.minStatsSize}px) {
+    padding: 2.4rem 1rem;
+  }
+
 `;
 
 const populateStartData = (isDarkMode) => {
@@ -67,7 +72,7 @@ const WeightChart = ({achievements}) => {
 
   return (
     <ChartBox>
-      <Heading as="h2">Weight Summary</Heading>
+      <Heading as="h2">Priority Summary</Heading>
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie

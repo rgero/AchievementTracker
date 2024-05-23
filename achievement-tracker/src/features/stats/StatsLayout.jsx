@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 
+import { Sizes } from '../../utils/constants';
 import Spinner from '../../ui/Spinner';
 import Stats from './Stats';
 import WeightChart from './WeightChart';
@@ -8,9 +9,13 @@ import { useStatsAchievements } from './hooks/useStatsAchievements';
 
 const StyledStatsLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2fr;
   grid-template-rows: auto 34rem auto;
   gap: 2.4rem;
+
+  @media(max-width: ${Sizes.minStatsSize}px) {
+    grid-template-columns: 1fr; // Switch to a single column
+  }
 `;
 
 
