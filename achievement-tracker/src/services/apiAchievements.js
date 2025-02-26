@@ -1,3 +1,5 @@
+import { decryptField, encryptField } from "../utils/crypt";
+
 import { ENTRIES_PER_PAGE } from "../utils/constants";
 import supabase from "./supabase";
 
@@ -24,8 +26,15 @@ export const getAchievements = async ({sortBy, searchBy, page}) => {
   if (error) {
     console.error(error);
     throw new Error("Achievements not found");
-  }  
-  return {data, count};
+  } 
+  
+  const decryptedData = data.map((item) => ({
+    ...item,
+    name: item.name ? decryptField(item.name) : item.name,
+    description: item.description ? decryptField(item.description) : item.description,
+  }));
+
+  return {data: decryptedData, count};
 }
 
 export const getStatsAchievements = async () => {
@@ -49,7 +58,12 @@ export const getAchievement = async (id) => {
     console.error(error);
     throw new Error("Achievement not found");
   }
-  return data;
+  
+  return {
+    ...data,
+    name: data.name ? decryptField(data.name) : data.name,
+    description: data.description ? decryptField(data.description) : data.description,
+  };
 }
 
 export const deleteAchievement = async (id) => 
@@ -68,12 +82,18 @@ export const deleteAchievement = async (id) =>
 
 export const addOrEditAchievement = async (newAchievement, id) => {
 
+  const encryptedData = {
+    ...newAchievement,
+    name: newAchievement.name ? encryptField(newAchievement.name) : undefined,
+    description: newAchievement.description ? encryptField(newAchievement.description) : undefined,
+  };
+
   let query = supabase.from('achievements');
   if (!id)
   {
-      query = query.insert([newAchievement])
+      query = query.insert([encryptedData])
   } else {
-      query = query.update([newAchievement]).eq('id', id).select();
+      query = query.update([encryptedData]).eq('id', id).select();
   }
 
   const { data, error } = await query.select().single();
