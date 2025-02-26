@@ -112,7 +112,7 @@ const CreateAchievementForm = ({achievement={}, onCloseModal}) => {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          Create
+          {isEditSession ? "Edit" : "Create"}
         </Button>
       </FormRow>
     </Form>

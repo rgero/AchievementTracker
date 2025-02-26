@@ -71,6 +71,21 @@ const AchievementDetail = () => {
 
   const {id, weight, name, description, date} = achievement;
   const correctedDate = parseDate(date);
+  
+  let weightString;
+  switch (weight) {
+    case 1:
+      weightString = "Low"
+      break;
+    case 2:
+      weightString = "Medium"
+      break;
+    case 3:
+      weightString = "High"
+      break;
+    default:
+      weightString = "Low";
+  } 
 
   const handleDelete = () => {
     deleteAchievement(id);
@@ -85,7 +100,7 @@ const AchievementDetail = () => {
             <Heading as="h1">{name}</Heading>
           </div>
           <div>
-            {weight.replace("-", " ")}
+            {weightString}
           </div>
         </Header>
         <Section>
