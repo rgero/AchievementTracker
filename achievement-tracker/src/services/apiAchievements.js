@@ -3,39 +3,51 @@ import { decryptField, encryptField } from "../utils/crypt";
 import { ENTRIES_PER_PAGE } from "../utils/constants";
 import supabase from "./supabase";
 
-export const getAchievements = async ({sortBy, searchBy, page}) => {
-  let query = supabase.from('achievements').select('*', {count: "exact"})
+export const getAchievements = async ({ sortBy, searchBy, page }) => {
+  const { data, error } = await supabase.from("achievements").select("*");
 
-  if (searchBy)
-  {
-    query = query.ilike('name', `%${searchBy}%`)
-  }
-  
-  if (sortBy)
-  {
-    query = query.order(sortBy.field, {ascending: sortBy.direction === "asc"})
-  }
-
-  if (page){
-    const from = ENTRIES_PER_PAGE * (page-1);
-    const to = from + ENTRIES_PER_PAGE - 1;
-    query = query.range(from, to);
-  }
-
-  const {data, error, count} = await query;
   if (error) {
     console.error(error);
     throw new Error("Achievements not found");
-  } 
-  
-  const decryptedData = data.map((item) => ({
+  }
+
+  // Decrypt fields
+  let decryptedData = data.map((item) => ({
     ...item,
     name: item.name ? decryptField(item.name) : item.name,
     description: item.description ? decryptField(item.description) : item.description,
   }));
 
-  return {data: decryptedData, count};
-}
+  // Filter based on search term
+  if (searchBy) {
+    const searchTerm = searchBy.toLowerCase();
+    decryptedData = decryptedData.filter((item) =>
+      item.name.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  // Sort data
+  if (sortBy) {
+    decryptedData.sort((a, b) => {
+      const fieldA = a[sortBy.field]?.toLowerCase();
+      const fieldB = b[sortBy.field]?.toLowerCase();
+      if (fieldA < fieldB) return sortBy.direction === "asc" ? -1 : 1;
+      if (fieldA > fieldB) return sortBy.direction === "asc" ? 1 : -1;
+      return 0;
+    });
+  }
+
+  // Paginate
+  const totalEntries = decryptedData.length;
+  if (page) {
+    const from = ENTRIES_PER_PAGE * (page - 1);
+    const to = from + ENTRIES_PER_PAGE;
+    decryptedData = decryptedData.slice(from, to);
+  }
+
+  return { data: decryptedData, count: totalEntries };
+};
+
 
 export const getStatsAchievements = async () => {
   let query = supabase.from('achievements').select('date,weight', {count: "exact"})
