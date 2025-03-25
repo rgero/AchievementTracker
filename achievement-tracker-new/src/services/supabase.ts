@@ -1,5 +1,3 @@
-import { SUPABASE_KEY, SUPABASE_URL } from "@env";
-
 import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_KEY;
