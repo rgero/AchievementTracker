@@ -1,25 +1,34 @@
-import './App.css'
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
-import { useState } from 'react'
+import { DarkModeProvider } from "./context/DarkModeContext";
+import LandingPage from "./pages/LandingPage";
+import PageNotFound from "./pages/PageNotFound";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-function App() {
-  const [count, setCount] = useState(0)
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 1000
+    }
+  }
+})
 
+const App = () => {
   return (
-    <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="landing" element={<LandingPage/>} />
+            <Route path='*' element={<PageNotFound/>} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </DarkModeProvider>
   )
+
 }
 
 export default App
