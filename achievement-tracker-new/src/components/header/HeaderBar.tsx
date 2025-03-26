@@ -1,4 +1,4 @@
-import { AppBar, Grid2 as Grid, Typography } from "@mui/material"
+import { AppBar, Box, Grid2 as Grid, Typography } from "@mui/material"
 
 import { Link } from "react-router-dom"
 import UserAvatar from "./UserAvatar"
@@ -9,12 +9,18 @@ const HeaderBar = () => {
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid>
           <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "inherit" }}>
-            <img 
-              src="/logo.png" 
-              alt="The Achievement Tracker" 
-              style={{ width: "32px", height: "32px", marginRight: "0.5rem" }} 
-            />
-            <Typography variant="h6">The Achievement Tracker</Typography>
+            <Box sx={{
+              width: { xs: "24px", md: "32px" },
+              height: { xs: "24px", md: "24px" },
+              marginRight: "0.5rem"
+            }}>
+              <img 
+                src="/logo.png" 
+                alt="Achievement Tracker" 
+                style={{ width: "100%", height: "100%" }} // Ensure img fills the Box
+              />
+            </Box>
+            <Typography variant="h6">Achievement Tracker</Typography>
           </Link>
         </Grid>
         <Grid>
