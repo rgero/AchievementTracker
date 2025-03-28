@@ -1,17 +1,9 @@
 import * as React from 'react';
 
-import { Box, TableHead, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, useMediaQuery, useTheme, } from '@mui/material';
 
 import AchievementRow from './AchievementRow';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableFooter from '@mui/material/TableFooter';
-import TablePagination from '@mui/material/TablePagination';
-import TablePaginationActions from './PaginationActions';
-import TableRow from '@mui/material/TableRow';
+import { is } from 'date-fns/locale';
 import { useAchievements } from '../../context/AchievementContext';
 
 const AchievementsTable = () => {
@@ -54,8 +46,8 @@ const AchievementsTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(rowsPerPage > 0 ? achievements.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : achievements).map((achievements) => (
-            <AchievementRow key={achievements.id} achievement={achievements} />
+          {(rowsPerPage > 0 ? achievements.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : achievements).map((achievement) => (
+            <AchievementRow key={achievement.id} achievement={achievement} />
           ))}
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
@@ -63,17 +55,22 @@ const AchievementsTable = () => {
             </TableRow>
           )}
         </TableBody>
-        <TableFooter>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            count={achievements.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </TableFooter>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={achievements.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage={isSmallScreen ? "Row" : "Rows per page"}
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}
+      />
     </TableContainer>
   );
 }
