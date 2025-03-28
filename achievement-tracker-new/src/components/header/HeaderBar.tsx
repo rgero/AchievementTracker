@@ -11,7 +11,7 @@ const HeaderBar = () => {
           <Link to="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", color: "inherit" }}>
             <Box sx={{
               width: { xs: "24px", md: "32px" },
-              height: { xs: "24px", md: "24px" },
+              height: { xs: "24px", md: "32px" },
               marginRight: "0.5rem"
             }}>
               <img 

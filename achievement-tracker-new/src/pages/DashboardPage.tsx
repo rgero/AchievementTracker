@@ -1,13 +1,13 @@
-import { Button, Container, Typography } from "@mui/material"
+import { Container, Typography } from "@mui/material"
 
-import { useAuth } from "../context/AuthenticationContext"
+import AchievementTable from "../components/achievements/AchievementTable"
 
 const DashboardPage = () => {
-  const {logout} = useAuth();
+
   return (
-    <Container>
+    <Container disableGutters>
       <Typography>Dashboard Page</Typography>
-      <Button variant="contained" onClick={logout}>Logout</Button>
+      <AchievementTable/>
     </Container>
   )
 }
