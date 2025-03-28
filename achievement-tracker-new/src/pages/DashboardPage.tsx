@@ -6,7 +6,6 @@ const DashboardPage = () => {
 
   return (
     <Container disableGutters>
-      <Typography>Dashboard Page</Typography>
       <AchievementTable/>
     </Container>
   )

@@ -1,94 +1,30 @@
 import * as React from 'react';
 
+import { Box, TableHead, Typography, useMediaQuery, useTheme } from '@mui/material';
+
 import AchievementRow from './AchievementRow';
-import Box from '@mui/material/Box';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import IconButton from '@mui/material/IconButton';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableFooter from '@mui/material/TableFooter';
-import { TableHead } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
+import TablePaginationActions from './PaginationActions';
 import TableRow from '@mui/material/TableRow';
 import { useAchievements } from '../../context/AchievementContext';
-import { useTheme } from '@mui/material/styles';
 
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number,
-  ) => void;
-}
-
-function TablePaginationActions(props: TablePaginationActionsProps) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </Box>
-  );
-}
-
-export default function CustomPaginationActionsTable() {
+const AchievementsTable = () => {
   const {achievements} = useAchievements();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+
+  if (!achievements || achievements.length === 0)
+    return ( <Typography variant="h6" align="center">No achievements found</Typography> ); 
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - achievements.length) : 0;
@@ -112,9 +48,9 @@ export default function CustomPaginationActionsTable() {
       <Table aria-label="Achievement Table">
         <TableHead>
           <TableRow>
-            <TableCell width="75%">Achievement Name</TableCell>
-            <TableCell align="right">Date</TableCell>
-            <TableCell align="right">Weight</TableCell>
+            <TableCell sx={{ width: {xs: "60%", md: "75%"}}}><Typography sx={{fontWeight: "bold"}}>Name</Typography></TableCell>
+            {!isSmallScreen && <TableCell align="right"><Typography sx={{fontWeight: "bold"}}>Date</Typography></TableCell>}
+            <TableCell align="right"><Typography sx={{fontWeight: "bold"}}>Weight</Typography></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -128,28 +64,18 @@ export default function CustomPaginationActionsTable() {
           )}
         </TableBody>
         <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
-              count={achievements.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  inputProps: {
-                    'aria-label': 'rows per page',
-                  },
-                  native: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            count={achievements.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </TableFooter>
       </Table>
     </TableContainer>
   );
 }
+
+export default AchievementsTable;
