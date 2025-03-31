@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/AuthenticationContext";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import DashboardPage from "./pages/DashboardPage";
+import { DialogProvider } from "./context/DialogContext";
 import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -29,24 +30,26 @@ const App = () => {
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <AchievementProvider>
-            <BrowserRouter>
-              <Routes>
-                {/* Redirect root ("/") to dashboard */}
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <DialogProvider>
+            <AchievementProvider>
+              <BrowserRouter>
+                <Routes>
+                  {/* Redirect root ("/") to dashboard */}
+                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-                <Route element={
-                  <AuthenticatedRoute>
-                    <AppLayout />
-                    </AuthenticatedRoute>
-                }>
-                  <Route index path="/dashboard" element={<DashboardPage />} />
-                </Route>
-                <Route path="/landing" element={<LandingPage />} />
-                <Route path="*" element={<PageNotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </AchievementProvider>
+                  <Route element={
+                    <AuthenticatedRoute>
+                      <AppLayout />
+                      </AuthenticatedRoute>
+                  }>
+                    <Route index path="/dashboard" element={<DashboardPage />} />
+                  </Route>
+                  <Route path="/landing" element={<LandingPage />} />
+                  <Route path="*" element={<PageNotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </AchievementProvider>
+          </DialogProvider>
         </AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
