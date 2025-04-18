@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, useMediaQuery, useTheme, } from '@mui/material';
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, useMediaQuery, useTheme,} from '@mui/material';
 
 import AchievementRow from './AchievementRow';
-import { is } from 'date-fns/locale';
 import { useAchievements } from '../../context/AchievementContext';
 
 const AchievementsTable = () => {

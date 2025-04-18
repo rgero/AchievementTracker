@@ -9,7 +9,7 @@ const AchievementRow = ({achievement}: {achievement: Achievement}) => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <TableRow>
+    <TableRow hover key={achievement.id}>
       <TableCell width="75%">{achievement.name}</TableCell>
       {!isSmallScreen && <TableCell align="right">{format(new Date(achievement.date), "yyyy-MM-dd")}</TableCell>}
       <TableCell align="right">{convertWeight(achievement.weight)}</TableCell>

@@ -1,8 +1,8 @@
 export interface Achievement {
   id?: number;
-  owner_id: string;
+  owner_id?: string;
   name: string;
   description?: string;
-  weight: number;
-  date: Date|string;
+  weight: string;
+  date: Date;
 }
