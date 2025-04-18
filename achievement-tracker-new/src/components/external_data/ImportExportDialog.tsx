@@ -1,10 +1,18 @@
-import Dialog from '../ui/Dialog';
-import ImportExportContent from './ImportExportContent';
+import { Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
 
-const ImportExportDialog = ({open, setOpen} : {open: boolean, setOpen: (open: boolean) => void}) => {
+import ImportExportContent from './ImportExportContent';
+import { useDialogContext } from '../../context/DialogContext';
+
+const ImportExportDialog = () => {
+  const {importExportOpen, toggleImportExport} = useDialogContext();
   return (
-    <Dialog open={open} setOpen={setOpen} title={"Import/Export"}>
-      <ImportExportContent/>
+    <Dialog open={importExportOpen} onClose={toggleImportExport} fullWidth={true}>
+      <Paper>
+        <DialogTitle>Import/Export</DialogTitle>
+        <DialogContent>
+          <ImportExportContent/>
+        </DialogContent>
+      </Paper>
     </Dialog>
   );
 }

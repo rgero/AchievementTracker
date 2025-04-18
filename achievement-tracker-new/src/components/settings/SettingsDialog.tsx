@@ -1,10 +1,16 @@
-import Dialog from '../ui/Dialog';
+import { Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
+
 import SettingsContent from './SettingsContent';
 
 const SettingsDialog = ({open, setOpen} : {open: boolean, setOpen: (open: boolean) => void}) => {
   return (
-    <Dialog open={open} setOpen={setOpen} title={"Settings"}>
-      <SettingsContent/>
+    <Dialog open={open} onClose={()=> setOpen(false)} fullWidth={true}>
+      <Paper>
+        <DialogTitle>Settings</DialogTitle>
+        <DialogContent>
+          <SettingsContent/>
+        </DialogContent>
+      </Paper>
     </Dialog>
   );
 }

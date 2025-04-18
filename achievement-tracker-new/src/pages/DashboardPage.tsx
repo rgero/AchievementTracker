@@ -1,16 +1,23 @@
-import { Achievement } from "../interfaces/Achievement"
-import AchievementForm from "../components/achievements/AchievementForm"
+import { Container, Fab } from "@mui/material"
+
 import AchievementTable from "../components/achievement_presentation/AchievementTable"
-import { Container } from "@mui/material"
-import { useState } from "react"
+import { useDialogContext } from "../context/DialogContext"
 
 const DashboardPage = () => {
-  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | undefined>(undefined)
-
+  const {toggleAchievementForm} = useDialogContext();
   return (
     <Container disableGutters>
-      <AchievementTable set={setSelectedAchievement}/>
-      <AchievementForm achievement={selectedAchievement}/>
+      <AchievementTable/>
+      <Fab
+        color="primary"
+        aria-label="add"
+        onClick={toggleAchievementForm}
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+        }}
+      />
     </Container>
   )
 }
