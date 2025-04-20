@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography, useMediaQuery, useTheme,} from '@mui/material';
 
 import AchievementRow from './AchievementRow';
+import TableHeader from './AchievementTableHeader';
 import { useAchievements } from '../../context/AchievementContext';
 
 const AchievementsTable = () => {
@@ -39,9 +40,9 @@ const AchievementsTable = () => {
       <Table aria-label="Achievement Table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ width: {xs: "60%", md: "75%"}}}><Typography sx={{fontWeight: "bold"}}>Name</Typography></TableCell>
-            {!isSmallScreen && <TableCell align="right"><Typography sx={{fontWeight: "bold"}}>Date</Typography></TableCell>}
-            <TableCell align="right"><Typography sx={{fontWeight: "bold"}}>Weight</Typography></TableCell>
+            <TableHeader sx={{ width: {xs: "60%", md: "75%"}}}>Name</TableHeader>
+            {!isSmallScreen && <TableHeader align="right">Date</TableHeader>}
+            <TableHeader align="right">Weight</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>

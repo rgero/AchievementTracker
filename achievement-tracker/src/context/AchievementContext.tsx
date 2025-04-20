@@ -8,48 +8,58 @@ import { useAuth } from "./AuthenticationContext";
 
 interface AchievementContextType {
   achievements: Achievement[];
-  selectedAchievement: Achievement | null;
-  isLoading: boolean;
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-  startDate: Date | null;
-  endDate: Date | null;
-  setStartDate: (date: Date | null) => void;
-  setEndDate: (date: Date | null) => void;
-  addNewAchievement: (achievement: Achievement) => Promise<void>;
   addMultipleAchievements: (achievements: Achievement[]) => Promise<void>;
+  addNewAchievement: (achievement: Achievement) => Promise<void>;
+  clearSelectedAchievement: () => void;
   deleteAchievementById: (achievementId: number) => Promise<void>;
   deleteMultipleAchievementsById: (achievements: Set<number>) => Promise<void>;
-  processSelectionChange: (achievementId: number) => void;
-  clearSelectedAchievement: () => void;
-  updateExistingAchievement: (updatedData: Partial<Achievement>) => Promise<void>;
+  endDate: Date | null;
   error: Error | null;
+  flipSortDirection: () => void;
+  isLoading: boolean;
+  processSelectionChange: (achievementId: number) => void;
+  searchQuery: string;
+  selectedAchievement: Achievement | null;
+  setEndDate: (date: Date | null) => void;
+  setSearchQuery: (query: string) => void;
+  setSortBy: (sortBy: string) => void;
+  setStartDate: (date: Date | null) => void;
+  sortBy: string;
+  sortByDirection: boolean;
+  startDate: Date | null;
+  updateExistingAchievement: (updatedData: Partial<Achievement>) => Promise<void>;
 }
 
 const AchievementContext = createContext<AchievementContextType>({
   achievements: [],
-  selectedAchievement: null,
-  isLoading: false,
-  searchQuery: "",
-  setSearchQuery: () => {},
-  startDate: null,
-  endDate: null,
-  setStartDate: () => {},
-  setEndDate: () => {},
-  addNewAchievement: async () => {},
   addMultipleAchievements: async () => {},
+  addNewAchievement: async () => {},
+  clearSelectedAchievement: () => {},
   deleteAchievementById: async () => {},
   deleteMultipleAchievementsById: async () => {},
-  processSelectionChange: () => {},
-  clearSelectedAchievement: () => {},
-  updateExistingAchievement: async () => {},
+  endDate: null,
   error: null,
+  flipSortDirection: () => {},
+  isLoading: false,
+  processSelectionChange: () => {},
+  searchQuery: "",
+  selectedAchievement: null,
+  setEndDate: () => {},
+  setSearchQuery: () => {},
+  setSortBy: () => {},
+  setStartDate: () => {},
+  sortBy: "",
+  sortByDirection: false,
+  startDate: null,
+  updateExistingAchievement: async () => {},
 });
 
 export const AchievementProvider = ({ children }) => {
   const queryClient = useQueryClient();
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [sortBy, setSortBy] = useState<string>("date");
+  const [sortByDirection, setSortDirection] = useState<boolean>(true);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const { user } = useAuth();
@@ -58,7 +68,9 @@ export const AchievementProvider = ({ children }) => {
     queryKey: ["achievements"],
     queryFn: () => getAchievements(),
   });
-  const filteredAchievements = filterAchievements(achievements, searchQuery, startDate, endDate);
+  
+  const sortByWithDirection = `${sortBy}-${sortByDirection ? "desc" : "asc"}`.toLowerCase();
+  const filteredAchievements = filterAchievements(achievements, sortByWithDirection,  searchQuery, startDate, endDate);
 
   const { mutateAsync: addNewAchievement } = useMutation({
     mutationFn: async (achievement: Achievement) => {
@@ -95,7 +107,7 @@ export const AchievementProvider = ({ children }) => {
   });
 
   const { mutateAsync: deleteAchievementById } = useMutation({
-    mutationFn: async (achievementId: string) => {
+    mutationFn: async (achievementId: number) => {
       await deleteAchievement(achievementId);
     },
     onSuccess: () => {
@@ -124,26 +136,34 @@ export const AchievementProvider = ({ children }) => {
     setSelectedAchievement(null);
   }
 
+  const flipSortDirection = () => {
+    setSortDirection((prev) => !prev);
+  };
+
   return (
     <AchievementContext.Provider
       value={{
         achievements: filteredAchievements,
-        selectedAchievement,
-        isLoading,
-        searchQuery,
-        setSearchQuery,
-        startDate,
-        endDate,
-        setStartDate,
-        setEndDate,
-        addNewAchievement,
         addMultipleAchievements,
+        addNewAchievement,
+        clearSelectedAchievement,
         deleteAchievementById,
         deleteMultipleAchievementsById,
-        processSelectionChange,
-        clearSelectedAchievement,
-        updateExistingAchievement,
+        endDate,
         error,
+        flipSortDirection,
+        isLoading,
+        processSelectionChange,
+        searchQuery,
+        selectedAchievement,
+        setEndDate,
+        setSearchQuery,
+        setSortBy,
+        setStartDate,
+        sortBy,
+        sortByDirection,
+        startDate,
+        updateExistingAchievement,
       }}
     >
       {children}
