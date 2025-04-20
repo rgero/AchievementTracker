@@ -8,7 +8,7 @@ import { useAuth } from "./AuthenticationContext";
 
 interface AchievementContextType {
   achievements: Achievement[];
-  selectedAchievements: Set<number>;
+  selectedAchievement: Achievement | null;
   isLoading: boolean;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -18,16 +18,17 @@ interface AchievementContextType {
   setEndDate: (date: Date | null) => void;
   addNewAchievement: (achievement: Achievement) => Promise<void>;
   addMultipleAchievements: (achievements: Achievement[]) => Promise<void>;
-  deleteAchievementById: (achievementId: string) => Promise<void>;
+  deleteAchievementById: (achievementId: number) => Promise<void>;
   deleteMultipleAchievementsById: (achievements: Set<number>) => Promise<void>;
-  setSelectedAchievements: (selectedAchievements: Set<number>) => void;
+  processSelectionChange: (achievementId: number) => void;
+  clearSelectedAchievement: () => void;
   updateExistingAchievement: (updatedData: Partial<Achievement>) => Promise<void>;
   error: Error | null;
 }
 
 const AchievementContext = createContext<AchievementContextType>({
   achievements: [],
-  selectedAchievements: new Set(),
+  selectedAchievement: null,
   isLoading: false,
   searchQuery: "",
   setSearchQuery: () => {},
@@ -39,14 +40,15 @@ const AchievementContext = createContext<AchievementContextType>({
   addMultipleAchievements: async () => {},
   deleteAchievementById: async () => {},
   deleteMultipleAchievementsById: async () => {},
+  processSelectionChange: () => {},
+  clearSelectedAchievement: () => {},
   updateExistingAchievement: async () => {},
-  setSelectedAchievements: () => {},
   error: null,
 });
 
 export const AchievementProvider = ({ children }) => {
   const queryClient = useQueryClient();
-  const [selectedAchievements, setSelectedAchievements] = useState<Set<number>>(new Set());
+  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -66,7 +68,7 @@ export const AchievementProvider = ({ children }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
-      selectedAchievements.clear();
+      setSelectedAchievement(null);
       refetch();
     },
   });
@@ -87,7 +89,7 @@ export const AchievementProvider = ({ children }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
-      selectedAchievements.clear();
+      setSelectedAchievement(null);
       refetch();
     },
   });
@@ -112,11 +114,21 @@ export const AchievementProvider = ({ children }) => {
     },
   });
 
+  const processSelectionChange = (achievementId: number) => {
+    const testAchievement = achievements.find((achievement) => achievement.id === achievementId);
+    if (!testAchievement) return;
+    setSelectedAchievement(testAchievement);
+  }
+
+  const clearSelectedAchievement = () => {
+    setSelectedAchievement(null);
+  }
+
   return (
     <AchievementContext.Provider
       value={{
         achievements: filteredAchievements,
-        selectedAchievements,
+        selectedAchievement,
         isLoading,
         searchQuery,
         setSearchQuery,
@@ -128,7 +140,8 @@ export const AchievementProvider = ({ children }) => {
         addMultipleAchievements,
         deleteAchievementById,
         deleteMultipleAchievementsById,
-        setSelectedAchievements,
+        processSelectionChange,
+        clearSelectedAchievement,
         updateExistingAchievement,
         error,
       }}

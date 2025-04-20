@@ -3,6 +3,6 @@ export interface Achievement {
   owner_id?: string;
   name: string;
   description?: string;
-  weight: string;
+  weight: number;
   date: Date;
 }

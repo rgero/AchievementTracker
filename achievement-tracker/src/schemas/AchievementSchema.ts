@@ -11,8 +11,5 @@ export const AchievementSchema = z.object({
   date: z.date().refine((date) => date <= endOfDay(Date()), {
     message: "Date cannot be in the future",
   }),
-  weight: z.string().refine((val) => {
-    const validWeights = ["low", "medium", "high"];
-    return validWeights.includes(val);
-  })
+  weight: z.number().min(1).max(3)
 }).strict();

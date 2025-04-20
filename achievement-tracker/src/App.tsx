@@ -30,26 +30,26 @@ const App = () => {
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <DialogProvider>
-            <AchievementProvider>
-              <BrowserRouter>
-                <Routes>
-                  {/* Redirect root ("/") to dashboard */}
-                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <AchievementProvider>
+            <DialogProvider>
+                <BrowserRouter>
+                  <Routes>
+                    {/* Redirect root ("/") to dashboard */}
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-                  <Route element={
-                    <AuthenticatedRoute>
-                      <AppLayout />
-                      </AuthenticatedRoute>
-                  }>
-                    <Route index path="/dashboard" element={<DashboardPage />} />
-                  </Route>
-                  <Route path="/landing" element={<LandingPage />} />
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </AchievementProvider>
-          </DialogProvider>
+                    <Route element={
+                      <AuthenticatedRoute>
+                        <AppLayout />
+                        </AuthenticatedRoute>
+                    }>
+                      <Route index path="/dashboard" element={<DashboardPage />} />
+                    </Route>
+                    <Route path="/landing" element={<LandingPage />} />
+                    <Route path="*" element={<PageNotFound />} />
+                  </Routes>
+                </BrowserRouter>
+            </DialogProvider>
+          </AchievementProvider>
         </AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

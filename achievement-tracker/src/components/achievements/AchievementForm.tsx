@@ -6,38 +6,59 @@ import { Achievement } from "../../interfaces/Achievement";
 import { AchievementSchema } from "../../schemas/AchievementSchema";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { endOfDay } from "date-fns";
+import { useAchievements } from "../../context/AchievementContext";
+import { useDialogContext } from "../../context/DialogContext";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const AchievementForm = ({ achievement }: { achievement?: Achievement }) => {
-  const {
-    control,
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Achievement>({
+const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) => {
+  const { addNewAchievement, deleteAchievementById, updateExistingAchievement } = useAchievements();
+  const { toggleAchievementForm } = useDialogContext();
+
+  const {control, register, reset, handleSubmit, formState: { errors } } = useForm<Achievement>({
     resolver: zodResolver(AchievementSchema),
     defaultValues: {
       ...achievement,
+      id: achievement?.id || undefined,
       name: achievement?.name || "",
       date: achievement?.date ? new Date(achievement.date) : endOfDay(new Date()),
-      weight: achievement?.weight || "medium",
+      weight: achievement?.weight || 2,
     },
   });
 
   useEffect(() => {
     reset({
+      id: achievement?.id || undefined,
       name: achievement?.name || "",
       description: achievement?.description || "",
       date: achievement?.date ? new Date(achievement.date) : endOfDay(new Date()),
-      weight: achievement?.weight || "medium",
+      weight: achievement?.weight || 2,
     });
   }, [achievement]);
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = (data: Achievement) => {
+    try {
+      if (data.id) {
+        updateExistingAchievement(data);
+      } else {
+        addNewAchievement(data);
+      }
+      toggleAchievementForm();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
+
+  const processDelete = async () => {
+    try {
+      if (achievement?.id) {
+        await deleteAchievementById(achievement.id);
+        toggleAchievementForm();
+      }
+    } catch (error) {
+      console.error("Error deleting achievement:", error);
+    }
+  }
 
   return (
     <Container maxWidth="sm" disableGutters>
@@ -70,14 +91,14 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement }) => {
               <Select
                 labelId="achievementWeight"
                 id="weight"
-                defaultValue={"medium"}
+                defaultValue={2}
                 {...register("weight")}
                 error={!!errors.weight}
                 label="Weight"
               >
-                <MenuItem value="low">Low</MenuItem>
-                <MenuItem value="medium">Medium</MenuItem>
-                <MenuItem value="high">High</MenuItem>
+                <MenuItem value={1}>Low</MenuItem>
+                <MenuItem value={2}>Medium</MenuItem>
+                <MenuItem value={3}>High</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -104,6 +125,12 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement }) => {
             />
           </Grid>
         </Grid>
+
+        {achievement?.id && (
+          <Button variant="outlined" color="error" onClick={processDelete}>
+            Delete
+          </Button>
+        )}
 
         <Button type="submit" variant="contained" color="primary">
           Submit
