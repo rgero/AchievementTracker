@@ -1,21 +1,27 @@
-import { Box, Button, Container, FormControl, Grid2 as Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material"
+import { Box, Container, FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { Controller, useForm } from "react-hook-form";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { forwardRef, useImperativeHandle } from "react";
 
 import { Achievement } from "../../interfaces/Achievement";
 import { AchievementSchema } from "../../schemas/AchievementSchema";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { endOfDay } from "date-fns";
-import { useAchievements } from "../../context/AchievementContext";
-import { useDialogContext } from "../../context/DialogContext";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) => {
-  const { addNewAchievement, deleteAchievementById, updateExistingAchievement } = useAchievements();
-  const { toggleAchievementForm } = useDialogContext();
+export interface AchievementFormHandle {
+  submit: () => void;
+}
 
-  const {control, register, reset, handleSubmit, formState: { errors } } = useForm<Achievement>({
+interface AchievementFormProps {
+  achievement?: Achievement | null;
+  onSubmit?: (data: Achievement) => void;
+}
+
+const AchievementForm = forwardRef<AchievementFormHandle, AchievementFormProps>(
+  ({ achievement, onSubmit: handleParentSubmit }, ref) => {
+  const { control, register, reset, handleSubmit, formState: { errors } } = useForm<Achievement>({
     resolver: zodResolver(AchievementSchema),
     defaultValues: {
       ...achievement,
@@ -25,6 +31,14 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) =>
       weight: achievement?.weight || 2,
     },
   });
+
+  useImperativeHandle(ref, () => ({
+    submit: () => handleSubmit(onSubmit)(),
+  }));
+
+  const onSubmit = (data: Achievement) => {
+    handleParentSubmit?.(data);
+  };
 
   useEffect(() => {
     reset({
@@ -36,36 +50,11 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) =>
     });
   }, [achievement]);
 
-  const onSubmit = (data: Achievement) => {
-    try {
-      if (data.id) {
-        updateExistingAchievement(data);
-      } else {
-        addNewAchievement(data);
-      }
-      toggleAchievementForm();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
-  const processDelete = async () => {
-    try {
-      if (achievement?.id) {
-        await deleteAchievementById(achievement.id);
-        toggleAchievementForm();
-      }
-    } catch (error) {
-      console.error("Error deleting achievement:", error);
-    }
-  }
-
   return (
     <Container maxWidth="sm" disableGutters>
       <Box
         component="form"
         noValidate
-        onSubmit={handleSubmit(onSubmit)}
         sx={{ display: "flex", flexDirection: "column", gap: 2, pt: "5px" }}
       >
         <TextField
@@ -74,7 +63,6 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) =>
           error={!!errors.name}
           helperText={errors.name?.message as string}
         />
-
         <TextField
           label="Description"
           multiline
@@ -83,7 +71,6 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) =>
           error={!!errors.description}
           helperText={errors.description?.message as string}
         />
-
         <Grid container direction="row" spacing={2}>
           <Grid flex={1}>
             <FormControl fullWidth error={!!errors.weight}>
@@ -125,19 +112,9 @@ const AchievementForm = ({ achievement }: { achievement?: Achievement|null }) =>
             />
           </Grid>
         </Grid>
-
-        {achievement?.id && (
-          <Button variant="outlined" color="error" onClick={processDelete}>
-            Delete
-          </Button>
-        )}
-
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
       </Box>
     </Container>
-  )
-}
+  );
+});
 
 export default AchievementForm
