@@ -34,7 +34,6 @@ const App = () => {
             <DialogProvider>
                 <BrowserRouter>
                   <Routes>
-                    {/* Redirect root ("/") to dashboard */}
                     <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
                     <Route element={

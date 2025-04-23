@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { Achievement } from "../interfaces/Achievement";
 import { filterAchievements } from "../utils/filterAchievements";
+import toast from "react-hot-toast";
 import { useAuth } from "./AuthenticationContext";
 
 interface AchievementContextType {
@@ -79,6 +80,7 @@ export const AchievementProvider = ({ children }) => {
       await addAchievement(achievement);
     },
     onSuccess: () => {
+      toast.success("Achievement added successfully!");
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
       setSelectedAchievement(null);
       refetch();
@@ -90,6 +92,7 @@ export const AchievementProvider = ({ children }) => {
       await addAchievements(achievements);
     },
     onSuccess: () => {
+      toast.success("Achievements added successfully!");
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
       refetch();
     },
@@ -100,6 +103,7 @@ export const AchievementProvider = ({ children }) => {
       await updateAchievement(updatedData.id, updatedData);
     },
     onSuccess: () => {
+      toast.success("Achievement updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
       setSelectedAchievement(null);
       refetch();
@@ -111,6 +115,7 @@ export const AchievementProvider = ({ children }) => {
       await deleteAchievement(achievementId);
     },
     onSuccess: () => {
+      toast.success("Achievement deleted successfully!");
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
       refetch();
     },
@@ -121,6 +126,7 @@ export const AchievementProvider = ({ children }) => {
       await deleteMultipleAchievements(achievementIds);
     },
     onSuccess: () => {
+      toast.success("Achievements deleted successfully!");
       queryClient.invalidateQueries({ queryKey: ["achievements"] });
       refetch();
     },
