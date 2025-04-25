@@ -1,16 +1,77 @@
-import { Dialog, DialogContent, DialogTitle, Paper, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid2 as Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
+import { DatePicker, LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { Clear } from '@mui/icons-material';
+import { useAchievements } from '../../context/AchievementContext';
 import { useDialogContext } from '../../context/DialogContext';
 
 const SearchDialog = () => {
   const {searchOpen, toggleSearch} = useDialogContext();
+
+  const {searchQuery, setSearchQuery, startDate, endDate, setStartDate, setEndDate} = useAchievements();
+
+  const handleClearAll = () => {
+    setSearchQuery('');
+    setStartDate(null);
+    setEndDate(null);
+  }
+
   return (
     <Dialog open={searchOpen} onClose={toggleSearch} fullWidth={true}>
       <Paper>
         <DialogTitle>Search</DialogTitle>
         <DialogContent>
-          <Typography>Search</Typography>
+          <TextField
+            id="search"
+            label="Name"
+            type="search"
+            variant="filled"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            fullWidth
+            InputProps={{
+              endAdornment: searchQuery && (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setSearchQuery('')}>
+                    <Clear />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Grid container spacing={2} direction="column" justifyContent="center" sx={{ marginTop: 2 }}>
+              <Grid>
+                <MobileDatePicker
+                  label="Start Date"
+                  value={startDate}
+                  onChange={setStartDate}
+                  sx={{width: '100%'}}
+                  slotProps={{
+                    field: { clearable: true },
+                  }}
+                />
+              </Grid>
+              <Grid>
+                <MobileDatePicker 
+                  label="End Date"
+                  value={endDate}
+                  onChange={setEndDate}
+                  sx={{width: '100%'}}
+                  slotProps={{
+                    field: { clearable: true },
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </LocalizationProvider>
         </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClearAll} color="primary">
+            Clear All
+          </Button>
+        </DialogActions>
       </Paper>
     </Dialog>
   );
