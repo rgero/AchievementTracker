@@ -1,10 +1,12 @@
 import { Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
 
 import SettingsContent from './SettingsContent';
+import { useDialogContext } from '../../context/DialogContext';
 
-const SettingsDialog = ({open, setOpen} : {open: boolean, setOpen: (open: boolean) => void}) => {
+const SettingsDialog = () => {
+  const {settingsOpen, toggleSettings} = useDialogContext();
   return (
-    <Dialog open={open} onClose={()=> setOpen(false)} fullWidth={true}>
+    <Dialog open={settingsOpen} onClose={toggleSettings} fullWidth={true}>
       <Paper>
         <DialogTitle>Settings</DialogTitle>
         <DialogContent>

@@ -4,10 +4,12 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fade, Grid2 
 import { Achievement } from "../../interfaces/Achievement";
 import {Delete} from "@mui/icons-material"
 import { useAchievements } from "../../context/AchievementContext"
+import { useDialogContext } from "../../context/DialogContext";
 import { useRef } from "react";
 import { useState } from "react";
 
-const AchievementDialog = ({ open, setOpen }: { open: boolean, setOpen: (open: boolean) => void }) => {
+const AchievementDialog = () => {
+  const {achievementFormOpen, toggleAchievementForm} = useDialogContext();
   const { selectedAchievement, clearSelectedAchievement, addNewAchievement, updateExistingAchievement, deleteAchievementById } = useAchievements();
   const formRef = useRef<AchievementFormHandle>(null);
   const [showDelete, setShowDelete] = useState(false);
@@ -15,7 +17,7 @@ const AchievementDialog = ({ open, setOpen }: { open: boolean, setOpen: (open: b
   const handleClose = () => {
     if (selectedAchievement) clearSelectedAchievement();
     setShowDelete(false);
-    setOpen(false);
+    toggleAchievementForm();
   };
 
   const handleFormSubmit = async (data: Achievement) => {
@@ -47,7 +49,7 @@ const AchievementDialog = ({ open, setOpen }: { open: boolean, setOpen: (open: b
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={achievementFormOpen} onClose={handleClose}>
       <Paper>
         <DialogTitle>
           <Grid container justifyContent="space-between" alignItems="center">

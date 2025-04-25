@@ -2,15 +2,18 @@ import React, { createContext, useContext } from 'react';
 
 import AchievementDialog from '../components/achievements/AchievementDialog';
 import ImportExportDialog from '../components/external_data/ImportExportDialog';
+import SearchDialog from '../components/search/SearchDialog';
 import SettingsDialog from '../components/settings/SettingsDialog';
 
 interface DialogContextType {
-  achievementForm: boolean;
+  achievementFormOpen: boolean;
   importExportOpen: boolean;
   settingsOpen: boolean;
+  searchOpen: boolean;
   areAnyOpen: boolean;
   toggleImportExport: () => void;
   toggleAchievementForm: () => void;
+  toggleSearch: () => void;
   toggleSettings: () => void;
 }
 
@@ -18,11 +21,12 @@ const DialogContext = createContext<DialogContextType | undefined>(undefined);
 
 export const DialogProvider = ({ children }: { children: React.ReactNode }) => {
   const [settingsOpen, setSettingsOpen] = React.useState(false);
+  const [searchOpen, setSearchOpen] = React.useState(false);
   const [importExportOpen, setImportExportOpen] = React.useState(false);
-  const [achievementForm, setAchievementForm] = React.useState(false);
+  const [achievementFormOpen, setachievementFormOpen] = React.useState(false);
 
   const toggleAchievementForm = () => {
-    setAchievementForm((prev) => !prev);
+    setachievementFormOpen((prev) => !prev);
   }
 
   const toggleSettings = () => {
@@ -33,19 +37,27 @@ export const DialogProvider = ({ children }: { children: React.ReactNode }) => {
     setImportExportOpen((prev) => !prev);
   }
 
+  const toggleSearch = () => {
+    setSearchOpen((prev) => !prev);
+  }
+
+
   return (
     <DialogContext.Provider value={{
-      achievementForm,
+      achievementFormOpen,
       importExportOpen, 
+      searchOpen,
       settingsOpen,
-      areAnyOpen: settingsOpen || importExportOpen,  
+      areAnyOpen: settingsOpen || importExportOpen || searchOpen || achievementFormOpen,  
       toggleImportExport,
+      toggleSearch,
       toggleSettings,
       toggleAchievementForm, 
     }}>
-      <AchievementDialog open={achievementForm} setOpen={setAchievementForm}/>
-      <SettingsDialog open={settingsOpen} setOpen={setSettingsOpen}/>
-      <ImportExportDialog open={importExportOpen} setOpen={setImportExportOpen}/>
+      <AchievementDialog/>
+      <SearchDialog/>
+      <SettingsDialog/>
+      <ImportExportDialog/>
       {children}
     </DialogContext.Provider>
   );
