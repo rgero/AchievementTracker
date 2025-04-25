@@ -39,7 +39,7 @@ const App = () => {
                     <Route element={
                       <AuthenticatedRoute>
                         <AppLayout />
-                        </AuthenticatedRoute>
+                      </AuthenticatedRoute>
                     }>
                       <Route index path="/dashboard" element={<DashboardPage />} />
                     </Route>

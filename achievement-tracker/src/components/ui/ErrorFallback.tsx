@@ -1,4 +1,4 @@
-import { Container, Grid, Typography, useTheme } from "@mui/material";
+import { Container, Grid2 as Grid, Typography, useTheme } from "@mui/material";
 
 const ErrorFallback = () => {
   const theme = useTheme();

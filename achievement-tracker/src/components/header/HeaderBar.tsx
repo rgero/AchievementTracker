@@ -35,7 +35,6 @@ const HeaderBar = () => {
           <Grid>
             <UserAvatar />
           </Grid>
-
         </Grid>
       </Grid>
     </AppBar>
