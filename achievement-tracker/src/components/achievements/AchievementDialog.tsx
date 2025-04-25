@@ -49,7 +49,7 @@ const AchievementDialog = () => {
   };
 
   return (
-    <Dialog open={achievementFormOpen} onClose={handleClose}>
+    <Dialog open={achievementFormOpen}>
       <Paper>
         <DialogTitle>
           <Grid container justifyContent="space-between" alignItems="center">
@@ -79,6 +79,7 @@ const AchievementDialog = () => {
         </DialogContent>
         <DialogActions>
           <Fade in={showDelete}><div><Button color="error" onClick={handleDelete}>Delete</Button></div></Fade>
+          <Button onClick={handleClose} color="primary">Cancel</Button>
           <Button onClick={handleSubmitClick}>Submit</Button>
         </DialogActions>
       </Paper>

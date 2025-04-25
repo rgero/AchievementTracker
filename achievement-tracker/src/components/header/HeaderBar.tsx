@@ -1,5 +1,6 @@
 import { AppBar, Box, Grid2 as Grid, Typography } from "@mui/material"
 
+import AchievementButton from "../achievements/AchievementButton"
 import { Link } from "react-router-dom"
 import SearchButton from "../search/SearchButton"
 import UserAvatar from "./UserAvatar"
@@ -27,6 +28,9 @@ const HeaderBar = () => {
         <Grid container alignItems="center" justifyContent="flex-end" spacing={2}>
           <Grid>
             <SearchButton/>
+          </Grid>
+          <Grid>
+            <AchievementButton/>
           </Grid>
           <Grid>
             <UserAvatar />
