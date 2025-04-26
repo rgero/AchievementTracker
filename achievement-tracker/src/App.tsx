@@ -32,21 +32,24 @@ const App = () => {
         <AuthProvider>
           <AchievementProvider>
             <DialogProvider>
-                <BrowserRouter>
-                  <Routes>
-                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
-                    <Route element={
-                      <AuthenticatedRoute>
-                        <AppLayout />
-                      </AuthenticatedRoute>
-                    }>
-                      <Route index path="/dashboard" element={<DashboardPage />} />
-                    </Route>
-                    <Route path="/landing" element={<LandingPage />} />
+              <BrowserRouter>
+                <Routes>
+                  <Route element={<AppLayout />}>
+                    {/* Authenticated routes */}
+                    <Route
+                      path="/dashboard"
+                      element={
+                        <AuthenticatedRoute>
+                          <DashboardPage />
+                        </AuthenticatedRoute>
+                      }
+                    />
                     <Route path="*" element={<PageNotFound />} />
-                  </Routes>
-                </BrowserRouter>
+                  </Route>
+                  <Route path="/landing" element={<LandingPage />} />
+                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                </Routes>
+              </BrowserRouter>
             </DialogProvider>
           </AchievementProvider>
         </AuthProvider>

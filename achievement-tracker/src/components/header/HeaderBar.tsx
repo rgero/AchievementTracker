@@ -4,8 +4,10 @@ import AchievementButton from "../achievements/AchievementButton"
 import { Link } from "react-router-dom"
 import SearchButton from "../search/SearchButton"
 import UserAvatar from "./UserAvatar"
+import { useAuth } from "../../context/AuthenticationContext"
 
 const HeaderBar = () => {
+  const {user} = useAuth();
   return (
     <AppBar position="static" sx={{ px: 2, padding: "0.75rem" }}>
       <Grid container justifyContent="space-between" alignItems="center">
@@ -25,17 +27,19 @@ const HeaderBar = () => {
             <Typography variant="h6">Achievement Tracker</Typography>
           </Link>
         </Grid>
-        <Grid container alignItems="center" justifyContent="flex-end" spacing={2}>
-          <Grid>
-            <SearchButton/>
+        {user && (
+          <Grid container alignItems="center" justifyContent="flex-end" spacing={2}>
+            <Grid>
+              <SearchButton/>
+            </Grid>
+            <Grid>
+              <AchievementButton/>
+            </Grid>
+            <Grid>
+              <UserAvatar />
+            </Grid>
           </Grid>
-          <Grid>
-            <AchievementButton/>
-          </Grid>
-          <Grid>
-            <UserAvatar />
-          </Grid>
-        </Grid>
+        )}
       </Grid>
     </AppBar>
   )
