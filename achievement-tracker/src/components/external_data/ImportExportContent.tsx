@@ -1,11 +1,25 @@
-import { Box, Typography } from "@mui/material"
+import { Box } from "@mui/material"
+import FileSelector from "./FileSelector"
+import { useAchievements } from "../../context/AchievementContext";
+import { useDialogContext } from "../../context/DialogContext";
 
 const ImportExportContent = () => {
+  const {addMultipleAchievements} = useAchievements();
+  const {toggleImportExport} = useDialogContext();
+
+  const processSubmit = async (data) => {
+    try {
+      await addMultipleAchievements(data);
+      toggleImportExport();
+    } catch (error)
+    {
+      console.error("Error importing achievements:", error);
+    }
+  }
+
   return (
     <Box style={{paddingTop: "1rem"}}>
-      <Box>
-        <Typography variant="body1" sx={{fontWeight: "bold"}}>Import/Export</Typography>
-      </Box>
+      <FileSelector onJSONLoad={processSubmit}/>
     </Box>
   )
 }

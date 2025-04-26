@@ -89,7 +89,7 @@ export const AchievementProvider = ({ children }) => {
 
   const { mutateAsync: addMultipleAchievements } = useMutation({
     mutationFn: async (achievements: Achievement[]) => {
-      await addAchievements(achievements);
+      await addAchievements(achievements, user.id);
     },
     onSuccess: () => {
       toast.success("Achievements added successfully!");

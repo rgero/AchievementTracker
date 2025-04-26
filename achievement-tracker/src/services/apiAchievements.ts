@@ -114,12 +114,15 @@ export const addAchievement = async (newAchievement: Achievement) => {
   return data;
 };
 
-export const addAchievements = async (newAchievements: Achievement[]) => {
+export const addAchievements = async (newAchievements: Achievement[], owner_id: string) => {
   const encryptedAchievements = newAchievements.map((achievement) => ({
     ...achievement,
+    owner_id: owner_id,
     name: encryptField(achievement.name),
     description: encryptField(achievement.description),
   }));
+
+  console.log(encryptedAchievements);
 
   const { data, error } = await supabase
     .from("achievements")
