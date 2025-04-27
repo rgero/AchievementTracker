@@ -48,9 +48,6 @@ const SearchDialog = () => {
                   value={startDate}
                   onChange={setStartDate}
                   sx={{width: '100%'}}
-                  slotProps={{
-                    field: { clearable: true },
-                  }}
                 />
               </Grid>
               <Grid>
@@ -59,9 +56,6 @@ const SearchDialog = () => {
                   value={endDate}
                   onChange={setEndDate}
                   sx={{width: '100%'}}
-                  slotProps={{
-                    field: { clearable: true },
-                  }}
                 />
               </Grid>
             </Grid>
