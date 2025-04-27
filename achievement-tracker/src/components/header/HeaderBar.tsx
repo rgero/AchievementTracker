@@ -1,4 +1,4 @@
-import { AppBar, Box, Grid2 as Grid, Typography } from "@mui/material"
+import { AppBar, Box, Grid2 as Grid, Typography, useMediaQuery, useTheme } from "@mui/material"
 
 import AchievementButton from "../achievements/AchievementButton"
 import { Link } from "react-router-dom"
@@ -8,6 +8,9 @@ import { useAuth } from "../../context/AuthenticationContext"
 
 const HeaderBar = () => {
   const {user} = useAuth();
+  const theme = useTheme();
+  const showAchievementButton = useMediaQuery(theme.breakpoints.up('md'));
+
   return (
     <AppBar position="static" sx={{ px: 2, padding: "0.75rem" }}>
       <Grid container justifyContent="space-between" alignItems="center">
@@ -32,9 +35,11 @@ const HeaderBar = () => {
             <Grid>
               <SearchButton/>
             </Grid>
-            <Grid>
-              <AchievementButton/>
-            </Grid>
+            {showAchievementButton && (
+              <Grid>
+                <AchievementButton/>
+              </Grid>
+            )}
             <Grid>
               <UserAvatar />
             </Grid>
