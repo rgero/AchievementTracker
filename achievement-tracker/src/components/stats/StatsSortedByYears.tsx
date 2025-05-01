@@ -1,43 +1,34 @@
-import { Container, Divider, Grid2 as Grid, Typography } from "@mui/material";
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import { Container, Typography, useTheme } from "@mui/material";
 
 import { useAchievements } from "../../context/AchievementContext";
 
 const StatsSortedByYears = () => {
   const {achievements} = useAchievements();
-  const byYear: Record<string, number> = achievements.reduce((acc, achievement) => {
-    const year = new Date(achievement.date).getFullYear().toString();
-    if (!acc[year]) {
-      acc[year] = 0;
-    }
-    acc[year]++;
-    return acc;
-  }, {} as Record<string, number>);
+  const theme = useTheme();
 
   if (achievements.length === 0) {
     return null;
   }
-
+  
+  const byYear = Object.entries(
+    achievements.reduce((acc, achievement) => {
+      const year = new Date(achievement.date).getFullYear().toString();
+      acc[year] = (acc[year] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>)
+  ).map(([year, count]) => ({ year, count }));
+  
   return (
     <Container>
       <Typography variant="h5">By Year</Typography>
-      <Grid container direction="column" sx={{ border: "1px solid", borderRadius: 5, p: 2 }}>
-        {Object.entries(byYear)
-          .sort(([a], [b]) => Number(b) - Number(a))
-          .map(([year, count]) => (
-            <Grid
-              container
-              direction="row"
-              key={year}
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{ mb: 1 }}
-            >
-              <Grid>{year}</Grid>
-              <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
-              <Grid>{count}</Grid>
-            </Grid>
-          ))}
-      </Grid>
+      <BarChart width={500} height={300} data={byYear}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="year"/>
+        <YAxis dataKey="count"/>
+        <Tooltip contentStyle={{background: theme.palette.background.paper}}cursor={{fill: 'transparent'}} />
+        <Bar dataKey="count" fill="#8884d8" background={false} />
+      </BarChart>
     </Container>
   )
 }
