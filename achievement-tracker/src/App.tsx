@@ -11,6 +11,7 @@ import { DialogProvider } from "./context/DialogContext";
 import LandingPage from "./pages/LandingPage";
 import PageNotFound from "./pages/PageNotFound";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import StatsPage from "./pages/StatsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,20 +35,22 @@ const App = () => {
             <DialogProvider>
               <BrowserRouter>
                 <Routes>
-                  <Route element={<AppLayout />}>
-                    {/* Authenticated routes */}
-                    <Route
-                      path="/dashboard"
-                      element={
-                        <AuthenticatedRoute>
-                          <DashboardPage />
-                        </AuthenticatedRoute>
-                      }
-                    />
-                    <Route path="*" element={<PageNotFound />} />
+                <Route
+                  element={
+                    <AuthenticatedRoute>
+                      <AppLayout />
+                    </AuthenticatedRoute>
+                  }
+                >
+                    <Route path="/dashboard" element={<DashboardPage />}/>
+                    <Route path="/stats" element={<StatsPage />}/>
+
                   </Route>
                   <Route path="/landing" element={<LandingPage />} />
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  <Route element={<AppLayout/>}>
+                    <Route path="*" element={<PageNotFound />} />
+                  </Route>
                 </Routes>
               </BrowserRouter>
             </DialogProvider>
