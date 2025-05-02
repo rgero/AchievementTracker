@@ -1,28 +1,44 @@
-import { Container, Grid2 as Grid, Typography, useTheme } from "@mui/material";
+import { Box, CssBaseline, Grid2 as Grid, Typography, useTheme } from "@mui/material";
+
+import HeaderBar from "../header/HeaderBar";
+import { useEffect } from "react";
 
 const ErrorFallback = () => {
   const theme = useTheme();
+
+  useEffect(() => {
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+
+    setVh();
+    window.addEventListener("resize", setVh);
+
+    return () => {
+      window.removeEventListener("resize", setVh);
+    };
+  }, []);
+
   return (
-    <Container
-      disableGutters
-      sx={{
-        minWidth: "100%",
-        backgroundColor: theme.palette.background.paper,
-        color: theme.palette.text.primary,
-      }}
-    >
-      <Grid
-        container
-        sx={{ height: "100vh", paddingTop: "2rem" }}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Typography variant="h6" align="center">
-          An error has occurred. Probably because you did something weird. Be proud and tell us how you got here.
-        </Typography>
-      </Grid>
-    </Container>
+    <>
+      <CssBaseline />
+      <Box display="flex" flexDirection="column" height="calc(var(--vh, 1vh) * 100)" bgcolor={theme.palette.background.default}>
+        <HeaderBar/>
+        <Grid
+          container
+          sx={{ height: "100vh", paddingTop: "2rem" }}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography variant="h6" align="center">
+            An error has occurred. Probably because you did something weird. Be proud and tell us how you got here.
+          </Typography>
+        </Grid>
+      </Box>
+    </>
+
   );
 };
 
