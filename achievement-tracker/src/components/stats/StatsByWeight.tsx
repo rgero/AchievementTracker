@@ -1,37 +1,37 @@
-import { Container, Divider, Grid2 as Grid, Typography } from "@mui/material";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Container, Typography, useTheme } from "@mui/material";
 
 import { convertWeight } from "../../utils/convertWeight";
 import { useAchievements } from "../../context/AchievementContext";
 
 const StatsByWeight = () => {
   const {achievements} = useAchievements();
-  const byWeight: Record<string, number> = achievements.reduce((acc, achievement) => {
-    const weight: number = achievement.weight;
-    if (!acc[weight]) {
-      acc[weight] = 0;
-    }
-    acc[weight]++;
-    return acc;
-  }, {} as Record<string, number>);
+  const theme = useTheme();
+
+  const byWeight = Object.entries(
+    achievements.reduce((acc, achievement) => {
+      const weight = convertWeight(achievement.weight.toString());
+      acc[weight] = (acc[weight] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>)
+  ).map(([weight, count]) => ({ weight, count }));
 
   if (achievements.length === 0) {
     return null;
   }
 
   return (
-    <Container>
+    <Container disableGutters sx={{display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center'}}>
       <Typography variant="h5">By Weight</Typography>
-      <Grid container direction="column" sx={{border: "1px solid", borderRadius: 5, padding: "10px"}}>
-        {Object.entries(byWeight).sort(([a], [b]) => Number(b) - Number(a)).map(([weight, count]) => {
-          return (
-            <Grid container direction="row" key={weight} justifyContent="space-between">
-              <Grid>{convertWeight(weight)}</Grid>
-              <Divider orientation="vertical" flexItem sx={{margin: "0 10px"}}/>
-              <Grid>{count}</Grid>
-            </Grid>
-          )
-        })}
-      </Grid>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={byWeight}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="weight"/>
+          <YAxis dataKey="count"/>
+          <Tooltip contentStyle={{background: theme.palette.background.paper}}cursor={{fill: 'transparent'}} />
+          <Bar dataKey="count" fill="#8884d8" background={false} />
+        </BarChart>
+      </ResponsiveContainer>
     </Container>
   )
 }

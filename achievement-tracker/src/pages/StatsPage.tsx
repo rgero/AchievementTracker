@@ -7,7 +7,7 @@ const StatsPage = () => {
   return (
     <Container>
       <Typography variant="h4">Stats</Typography>
-      <Grid container direction="row">
+      <Grid container direction="column">
         <Grid>
           <StatsSortedByYears/>
         </Grid>
