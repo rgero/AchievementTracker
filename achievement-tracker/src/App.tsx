@@ -18,7 +18,7 @@ import StatsPage from "./pages/StatsPage";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 1000, // Keep existing staleTime
+      staleTime: 5 * 1000,
     },
     mutations: {
       onError: (error) => {

@@ -3,7 +3,7 @@ import FileSelector from "./FileSelector"
 import { useAchievements } from "../../context/AchievementContext";
 import { useDialogContext } from "../../context/DialogContext";
 
-const ImportExportContent = () => {
+const ImportContent = () => {
   const {addMultipleAchievements} = useAchievements();
   const {toggleImportExport} = useDialogContext();
 
@@ -24,4 +24,4 @@ const ImportExportContent = () => {
   )
 }
 
-export default ImportExportContent
+export default ImportContent

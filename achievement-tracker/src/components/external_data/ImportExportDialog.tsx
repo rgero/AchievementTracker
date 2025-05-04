@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
 
-import ImportExportContent from './ImportExportContent';
+import ImportContent from './ImportContent';
 import { useDialogContext } from '../../context/DialogContext';
 
 const ImportExportDialog = () => {
@@ -10,7 +10,7 @@ const ImportExportDialog = () => {
       <Paper>
         <DialogTitle>Import/Export</DialogTitle>
         <DialogContent>
-          <ImportExportContent/>
+          <ImportContent/>
         </DialogContent>
       </Paper>
     </Dialog>
