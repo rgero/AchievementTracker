@@ -18,7 +18,7 @@ const ImportContent = () => {
   }
 
   return (
-    <Box style={{paddingTop: "1rem"}}>
+    <Box style={{paddingTop: "1rem", minHeight: "250px"}}>
       <FileSelector onJSONLoad={processSubmit}/>
     </Box>
   )
