@@ -36,7 +36,7 @@ const LandingPage = () => {
             </Grid>
             <Grid alignItems="center">
               <Typography variant="body1">Welcome to the Achievement Tracker.</Typography>
-              <Typography>A website meant for you to easily remember your accomplishements.</Typography>
+              <Typography>A website meant for you to easily remember your accomplishments.</Typography>
             </Grid>
             <Grid container justifyContent="flex-end">
               <Button variant="contained" color="primary" onClick={loginWithGoogle}>Login</Button>
