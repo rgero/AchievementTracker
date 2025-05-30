@@ -1,4 +1,4 @@
-import { Box, Container, FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Box, Container, FormControl, Grid2 as Grid, InputLabel, MenuItem, Select, TextField, useMediaQuery, useTheme } from "@mui/material"
 import { Controller, useForm } from "react-hook-form";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { forwardRef, useImperativeHandle } from "react";
@@ -31,6 +31,8 @@ const AchievementForm = forwardRef<AchievementFormHandle, AchievementFormProps>(
       weight: achievement?.weight || 2,
     },
   });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useImperativeHandle(ref, () => ({
     submit: () => handleSubmit(onSubmit)(),
@@ -71,7 +73,7 @@ const AchievementForm = forwardRef<AchievementFormHandle, AchievementFormProps>(
           error={!!errors.description}
           helperText={errors.description?.message as string}
         />
-        <Grid container direction="row" spacing={2}>
+        <Grid container direction={isMobile ? "column" : "row"} spacing={2}>
           <Grid flex={1}>
             <FormControl fullWidth error={!!errors.weight}>
               <InputLabel id="achievementWeight">Weight</InputLabel>
