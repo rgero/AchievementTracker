@@ -51,18 +51,23 @@ const AchievementsTable = () => {
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={isSmallScreen ? [] : [5, 10, 25]}
         component="div"
         count={achievements.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage={isSmallScreen ? "Row" : "Rows per page"}
+        labelRowsPerPage={isSmallScreen ? '' : 'Rows per page'}
+        SelectProps={{
+          native: true,
+          style: isSmallScreen ? { display: 'none' } : {},
+        }}
         sx={{
           width: '100%',
           display: 'flex',
-          justifyContent: 'flex-end',
+          justifyContent: 'flex-start',
+          paddingLeft: 2,
         }}
       />
     </TableContainer>
