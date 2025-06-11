@@ -9,7 +9,7 @@ import { useAchievements } from '../../context/AchievementContext';
 const AchievementsTable = () => {
   const {achievements} = useAchievements();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
