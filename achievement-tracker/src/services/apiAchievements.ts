@@ -122,14 +122,12 @@ export const addAchievements = async (newAchievements: Achievement[], owner_id: 
     description: encryptField(achievement.description),
   }));
 
-  console.log(encryptedAchievements);
-
   const { data, error } = await supabase
     .from("achievements")
     .insert(encryptedAchievements);
 
   if (error) {
-    console.log(error);
+    console.error(error);
     throw new Error("Achievements were not added");
   }
   return data;
