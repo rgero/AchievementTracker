@@ -1,5 +1,5 @@
 import { Brightness4, Brightness7 } from "@mui/icons-material"
-import { Grid2 as Grid, Switch, Typography, useTheme } from "@mui/material"
+import { Grid, Switch, Typography, useTheme } from "@mui/material"
 
 import { useDarkMode } from "../../../context/DarkModeContext";
 

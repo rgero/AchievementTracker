@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Grid2 as Grid, Typography, useTheme } from "@mui/material";
+import { Box, CssBaseline, Grid, Typography, useTheme } from "@mui/material";
 
 import HeaderBar from "../header/HeaderBar";
 import { useEffect } from "react";

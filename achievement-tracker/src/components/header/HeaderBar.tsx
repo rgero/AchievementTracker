@@ -1,4 +1,4 @@
-import { AppBar, Box, Grid2 as Grid, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { AppBar, Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material"
 
 import AchievementButton from "../achievements/AchievementButton"
 import { Link } from "react-router-dom"

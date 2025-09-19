@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Grid2 as Grid, Theme, Typography, useTheme } from "@mui/material";
+import { Button, Card, CardContent, Grid, Theme, Typography, useTheme } from "@mui/material";
 
 import { useAuth } from "../context/AuthenticationContext";
 import { useEffect } from "react";

@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid2 as Grid } from "@mui/material"
+import { CircularProgress, Container, Grid } from "@mui/material"
 
 const Loading = () => {
   return (

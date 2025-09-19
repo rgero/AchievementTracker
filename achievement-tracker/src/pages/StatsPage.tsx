@@ -1,4 +1,4 @@
-import { Container, Grid2 as Grid, Typography } from "@mui/material"
+import { Container, Grid, Typography } from "@mui/material"
 
 import StatsByWeight from "../components/stats/StatsByWeight"
 import StatsSortedByYears from "../components/stats/StatsSortedByYears"

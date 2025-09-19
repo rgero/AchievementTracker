@@ -1,5 +1,5 @@
 import AchievementForm, { AchievementFormHandle } from "./AchievementForm"
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fade, Grid2 as Grid, IconButton, Paper } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fade, Grid, IconButton, Paper } from "@mui/material"
 
 import { Achievement } from "../../interfaces/Achievement";
 import {Delete} from "@mui/icons-material"
