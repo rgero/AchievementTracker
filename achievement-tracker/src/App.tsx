@@ -5,7 +5,7 @@ import { AchievementProvider } from "./context/achievement/AchievementProvider";
 import AppLayout from "./components/ui/AppLayout";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import { AuthenticationProvider } from "./context/authentication/AuthenicationProvider";
-import { DarkModeProvider } from "./context/DarkModeContext";
+import DarkModeProvider from "./context/darkmode/DarkModeProvider";
 import DashboardPage from "./pages/DashboardPage";
 import { DialogProvider } from "./context/dialog/DialogProvider";
 import { ErrorBoundary } from "react-error-boundary";

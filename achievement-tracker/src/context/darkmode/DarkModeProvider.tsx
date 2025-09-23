@@ -1,13 +1,9 @@
 import { ThemeProvider, createTheme } from "@mui/material";
-import { createContext, useContext, useMemo } from "react";
 
-import CustomToaster from "../components/ui/CustomToaster";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-
-const DarkModeContext = createContext({
-  isDarkMode: false,
-  toggleDarkMode: () => {}
-});
+import CustomToaster from "../../components/ui/CustomToaster";
+import { DarkModeContext } from "./DarkModeContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useMemo } from "react";
 
 const DarkModeProvider = ({ children }: {children: React.ReactNode}) => {
 
@@ -16,7 +12,6 @@ const DarkModeProvider = ({ children }: {children: React.ReactNode}) => {
     window.matchMedia("(prefers-color-scheme: dark)").matches // Default to user's OS setting
   );
   
-
   const mode = isDarkMode ? "dark" : "light";
   const theme = useMemo(
     () =>
@@ -41,11 +36,4 @@ const DarkModeProvider = ({ children }: {children: React.ReactNode}) => {
     </DarkModeContext.Provider>
   );
 }
-
-const useDarkMode = () => {
-  const context = useContext(DarkModeContext);
-  if (context === undefined) throw new Error("DarkModeContext was used outside of DarkModeProvider");
-  return context;
-}
-
-export { DarkModeProvider, useDarkMode };
+export default DarkModeProvider;
