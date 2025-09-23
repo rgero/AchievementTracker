@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { AchievementProvider } from "./context/AchievementContext";
 import AppLayout from "./components/ui/AppLayout";
-import { AuthProvider } from "./context/AuthenticationContext";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import { AuthenticationProvider } from "./context/authentication/AuthenicationProvider";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import DashboardPage from "./pages/DashboardPage";
 import { DialogProvider } from "./context/DialogContext";
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <DarkModeProvider>
         <QueryClientProvider client={queryClient}>
-          <AuthProvider>
+          <AuthenticationProvider>
             <AchievementProvider>
               <DialogProvider>
                 <BrowserRouter>
@@ -58,7 +58,7 @@ const App = () => {
                 </BrowserRouter>
               </DialogProvider>
             </AchievementProvider>
-          </AuthProvider>
+          </AuthenticationProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     </DarkModeProvider>

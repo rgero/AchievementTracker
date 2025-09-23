@@ -1,10 +1,10 @@
 import { Avatar } from "@mui/material";
 import HeaderMenu from "./HeaderMenu";
-import { useAuth } from "../../context/AuthenticationContext";
+import { useAuthenticationContext } from "../../context/authentication/AuthenicationContext";
 import { useState } from "react";
 
 const UserAvatar = () => {
-  const {user} = useAuth(); 
+  const {user} = useAuthenticationContext(); 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const userImage = user ? user.user_metadata.avatar : "/default-user.jpg";

@@ -1,9 +1,9 @@
 import HeaderMenuOption from "./HeaderMenuOption";
 import { Logout } from "@mui/icons-material";
-import { useAuth } from "../../../context/AuthenticationContext";
+import { useAuthenticationContext } from "../../../context/authentication/AuthenicationContext";
 
 const LogoutOption = () => {
-  const {logout} = useAuth();
+  const {logout} = useAuthenticationContext();
   return (
     <HeaderMenuOption icon={<Logout/>} text="Log out" onClick={logout}/>
   )

@@ -4,10 +4,10 @@ import AchievementButton from "../achievements/AchievementButton"
 import { Link } from "react-router-dom"
 import SearchButton from "../search/SearchButton"
 import UserAvatar from "./UserAvatar"
-import { useAuth } from "../../context/AuthenticationContext"
+import { useAuthenticationContext } from "../../context/authentication/AuthenicationContext"
 
 const HeaderBar = () => {
-  const {user} = useAuth();
+  const {user} = useAuthenticationContext();
   const theme = useTheme();
   const showAchievementButton = useMediaQuery(theme.breakpoints.up('md'));
 

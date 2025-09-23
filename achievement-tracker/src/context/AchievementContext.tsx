@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Achievement } from "../interfaces/Achievement";
 import { filterAchievements } from "../utils/filterAchievements";
 import toast from "react-hot-toast";
-import { useAuth } from "./AuthenticationContext";
+import { useAuthenticationContext } from "./authentication/AuthenicationContext";
 
 interface AchievementContextType {
   achievements: Achievement[];
@@ -63,7 +63,7 @@ export const AchievementProvider = ({ children }) => {
   const [sortByDirection, setSortDirection] = useState<boolean>(true);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const { user } = useAuth();
+  const { user } = useAuthenticationContext();
 
   const { data: achievements = [], error, isLoading, refetch } = useQuery({
     queryKey: ["achievements"],

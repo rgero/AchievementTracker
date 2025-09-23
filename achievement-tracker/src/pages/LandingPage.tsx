@@ -1,11 +1,11 @@
 import { Button, Card, CardContent, Grid, Theme, Typography, useTheme } from "@mui/material";
 
-import { useAuth } from "../context/AuthenticationContext";
+import { useAuthenticationContext } from "../context/authentication/AuthenicationContext";
 import { useEffect } from "react";
 
 const LandingPage = () => {
   const theme: Theme = useTheme();
-  const {loginWithGoogle} = useAuth();
+  const {loginWithGoogle} = useAuthenticationContext();
 
   useEffect(() => {
     document.body.style.background = `url('/background.jpg') center/cover no-repeat fixed`;

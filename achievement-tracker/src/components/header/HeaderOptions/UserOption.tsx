@@ -1,9 +1,9 @@
 import HeaderMenuOption from "./HeaderMenuOption";
 import { Person } from "@mui/icons-material";
-import { useAuth } from "../../../context/AuthenticationContext";
+import { useAuthenticationContext } from "../../../context/authentication/AuthenicationContext";
 
 const UserOption = () => {
-  const {user} = useAuth();
+  const {user} = useAuthenticationContext();
   const userName =  user ? user.user_metadata.full_name : "Default User";
 
   return (

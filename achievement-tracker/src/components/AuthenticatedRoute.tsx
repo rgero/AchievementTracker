@@ -2,11 +2,11 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import Loading from "./ui/Loading";
 import React from "react";
-import { useAuth } from "../context/AuthenticationContext";
+import { useAuthenticationContext } from "../context/authentication/AuthenicationContext";
 
 const AuthenticatedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { user, isLoading } = useAuth();
-  const location = useLocation(); // To keep track of where the user was
+  const { user, isLoading } = useAuthenticationContext();
+  const location = useLocation();
 
   if (isLoading) {
     return <Loading />;
