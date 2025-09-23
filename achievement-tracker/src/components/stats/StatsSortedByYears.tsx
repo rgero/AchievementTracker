@@ -1,10 +1,10 @@
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Container, Typography, useTheme } from "@mui/material";
 
-import { useAchievements } from "../../context/AchievementContext";
+import { useAchievementsContext } from '../../context/achievement/AchievementContext';
 
 const StatsSortedByYears = () => {
-  const {achievements} = useAchievements();
+  const {achievements} = useAchievementsContext();
   const theme = useTheme();
 
   if (achievements.length === 0) {

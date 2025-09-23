@@ -3,14 +3,14 @@ import { TableCell, TableRow, useMediaQuery, useTheme } from "@mui/material"
 import { Achievement } from "../../interfaces/Achievement"
 import { convertWeight } from "../../utils/convertWeight"
 import {format} from 'date-fns'
-import { useAchievements } from "../../context/AchievementContext"
+import { useAchievementsContext } from "../../context/achievement/AchievementContext"
 import { useDialogContext } from "../../context/DialogContext"
 
 const AchievementRow = ({achievement}: {achievement: Achievement}) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const {selectedAchievement, processSelectionChange} = useAchievements();
+  const {selectedAchievement, processSelectionChange} = useAchievementsContext();
   const {toggleAchievementForm} = useDialogContext();
 
   const processClick = () => {

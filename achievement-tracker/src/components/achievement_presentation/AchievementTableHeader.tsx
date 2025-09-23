@@ -1,13 +1,15 @@
 import { TableCell, TableCellProps, Typography } from "@mui/material";
 
-import { useAchievements } from "../../context/AchievementContext";
+import { useAchievementsContext } from "../../context/achievement/AchievementContext";
+
+;
 
 interface TableHeaderProps extends TableCellProps {
   children: React.ReactNode;
 }
 
 const TableHeader = ({ children, ...rest }: TableHeaderProps) => {
-  const { sortBy, sortByDirection, setSortBy, flipSortDirection } = useAchievements();
+  const { sortBy, sortByDirection, setSortBy, flipSortDirection } = useAchievementsContext();
 
   const processSortChange = () => {
     if (sortBy === (children as string)) {

@@ -1,9 +1,11 @@
 import { Box, Button } from "@mui/material";
 
-import { useAchievements } from "../../context/AchievementContext";
+import { useAchievementsContext } from "../../context/achievement/AchievementContext";
+
+;
 
 const ExportContent = () => {
-  const { achievements } = useAchievements(); // assumes `achievements` is accessible
+  const { achievements } = useAchievementsContext(); // assumes `achievements` is accessible
 
   const handleExport = () => {
     const json = JSON.stringify(achievements, null, 2);

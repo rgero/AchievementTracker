@@ -3,14 +3,14 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fade, Grid, 
 
 import { Achievement } from "../../interfaces/Achievement";
 import {Delete} from "@mui/icons-material"
-import { useAchievements } from "../../context/AchievementContext"
+import { useAchievementsContext } from "../../context/achievement/AchievementContext";
 import { useDialogContext } from "../../context/DialogContext";
 import { useRef } from "react";
 import { useState } from "react";
 
 const AchievementDialog = () => {
   const {achievementFormOpen, toggleAchievementForm} = useDialogContext();
-  const { selectedAchievement, clearSelectedAchievement, addNewAchievement, updateExistingAchievement, deleteAchievementById } = useAchievements();
+  const { selectedAchievement, clearSelectedAchievement, addNewAchievement, updateExistingAchievement, deleteAchievementById } = useAchievementsContext();
   const formRef = useRef<AchievementFormHandle>(null);
   const [showDelete, setShowDelete] = useState(false);
 

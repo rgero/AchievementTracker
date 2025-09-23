@@ -4,10 +4,10 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagi
 
 import AchievementRow from './AchievementRow';
 import TableHeader from './AchievementTableHeader';
-import { useAchievements } from '../../context/AchievementContext';
+import { useAchievementsContext } from '../../context/achievement/AchievementContext';
 
 const AchievementsTable = () => {
-  const {achievements} = useAchievements();
+  const {achievements} = useAchievementsContext();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

@@ -1,15 +1,15 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, InputAdornment, Paper, TextField } from '@mui/material';
-import { DatePicker, LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Clear } from '@mui/icons-material';
-import { useAchievements } from '../../context/AchievementContext';
+import { useAchievementsContext } from '../../context/achievement/AchievementContext';
 import { useDialogContext } from '../../context/DialogContext';
 
 const SearchDialog = () => {
   const {searchOpen, toggleSearch} = useDialogContext();
 
-  const {searchQuery, setSearchQuery, startDate, endDate, setStartDate, setEndDate} = useAchievements();
+  const {searchQuery, setSearchQuery, startDate, endDate, setStartDate, setEndDate} = useAchievementsContext();
 
   const handleClearAll = () => {
     setSearchQuery('');

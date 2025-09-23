@@ -1,61 +1,14 @@
-import { addAchievement, addAchievements, deleteAchievement, deleteMultipleAchievements, getAchievements, updateAchievement } from "../services/apiAchievements";
-import { createContext, useContext, useState } from "react";
+import { addAchievement, addAchievements, deleteAchievement, deleteMultipleAchievements, getAchievements, updateAchievement } from "../../services/apiAchievements";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { Achievement } from "../interfaces/Achievement";
-import { filterAchievements } from "../utils/filterAchievements";
+import { Achievement } from "../../interfaces/Achievement";
+import { AchievementContext } from "./AchievementContext";
+import { filterAchievements } from "../../utils/filterAchievements";
 import toast from "react-hot-toast";
-import { useAuthenticationContext } from "./authentication/AuthenicationContext";
+import { useAuthenticationContext } from "../authentication/AuthenicationContext";
+import { useState } from "react";
 
-interface AchievementContextType {
-  achievements: Achievement[];
-  addMultipleAchievements: (achievements: Achievement[]) => Promise<void>;
-  addNewAchievement: (achievement: Achievement) => Promise<void>;
-  clearSelectedAchievement: () => void;
-  deleteAchievementById: (achievementId: number) => Promise<void>;
-  deleteMultipleAchievementsById: (achievements: Set<number>) => Promise<void>;
-  endDate: Date | null;
-  error: Error | null;
-  flipSortDirection: () => void;
-  isLoading: boolean;
-  processSelectionChange: (achievementId: number) => void;
-  searchQuery: string;
-  selectedAchievement: Achievement | null;
-  setEndDate: (date: Date | null) => void;
-  setSearchQuery: (query: string) => void;
-  setSortBy: (sortBy: string) => void;
-  setStartDate: (date: Date | null) => void;
-  sortBy: string;
-  sortByDirection: boolean;
-  startDate: Date | null;
-  updateExistingAchievement: (updatedData: Partial<Achievement>) => Promise<void>;
-}
-
-const AchievementContext = createContext<AchievementContextType>({
-  achievements: [],
-  addMultipleAchievements: async () => {},
-  addNewAchievement: async () => {},
-  clearSelectedAchievement: () => {},
-  deleteAchievementById: async () => {},
-  deleteMultipleAchievementsById: async () => {},
-  endDate: null,
-  error: null,
-  flipSortDirection: () => {},
-  isLoading: false,
-  processSelectionChange: () => {},
-  searchQuery: "",
-  selectedAchievement: null,
-  setEndDate: () => {},
-  setSearchQuery: () => {},
-  setSortBy: () => {},
-  setStartDate: () => {},
-  sortBy: "",
-  sortByDirection: false,
-  startDate: null,
-  updateExistingAchievement: async () => {},
-});
-
-export const AchievementProvider = ({ children }) => {
+export const AchievementProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const queryClient = useQueryClient();
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -75,7 +28,7 @@ export const AchievementProvider = ({ children }) => {
 
   const { mutateAsync: addNewAchievement } = useMutation({
     mutationFn: async (achievement: Achievement) => {
-      achievement = { ...achievement, owner_id: user.id };
+      achievement = { ...achievement, owner_id: user?.id };
       if (!achievement.id) delete achievement.id;
       await addAchievement(achievement);
     },
@@ -89,7 +42,7 @@ export const AchievementProvider = ({ children }) => {
 
   const { mutateAsync: addMultipleAchievements } = useMutation({
     mutationFn: async (achievements: Achievement[]) => {
-      await addAchievements(achievements, user.id);
+      await addAchievements(achievements, user?.id);
     },
     onSuccess: () => {
       toast.success("Achievements added successfully!");
@@ -133,7 +86,7 @@ export const AchievementProvider = ({ children }) => {
   });
 
   const processSelectionChange = (achievementId: number) => {
-    const testAchievement = achievements.find((achievement) => achievement.id === achievementId);
+    const testAchievement = achievements.find((achievement: Achievement) => achievement.id === achievementId);
     if (!testAchievement) return;
     setSelectedAchievement(testAchievement);
   }
@@ -175,10 +128,4 @@ export const AchievementProvider = ({ children }) => {
       {children}
     </AchievementContext.Provider>
   );
-};
-
-export const useAchievements = () => {
-  const context = useContext(AchievementContext);
-  if (!context) throw new Error("useAchievements must be used within an AchievementProvider");
-  return context;
 };

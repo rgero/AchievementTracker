@@ -2,10 +2,10 @@ import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxi
 import { Container, Typography, useTheme } from "@mui/material";
 
 import { convertWeight } from "../../utils/convertWeight";
-import { useAchievements } from "../../context/AchievementContext";
+import { useAchievementsContext } from "../../context/achievement/AchievementContext";
 
 const StatsByWeight = () => {
-  const {achievements} = useAchievements();
+  const {achievements} = useAchievementsContext();
   const theme = useTheme();
 
   const byWeight = Object.entries(
