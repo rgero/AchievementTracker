@@ -4,7 +4,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fade, Grid, 
 import { Achievement } from "../../interfaces/Achievement";
 import {Delete} from "@mui/icons-material"
 import { useAchievementsContext } from "../../context/achievement/AchievementContext";
-import { useDialogContext } from "../../context/DialogContext";
+import { useDialogContext } from "../../context/dialog/DialogContext";
 import { useRef } from "react";
 import { useState } from "react";
 

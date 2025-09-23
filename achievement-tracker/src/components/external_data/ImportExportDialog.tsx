@@ -3,7 +3,7 @@ import { Box, Dialog, DialogContent, Paper, Tab, Tabs } from '@mui/material';
 import ExportContent from './ExportContent';
 import ImportContent from './ImportContent';
 import TabPanel from './TabPanel';
-import { useDialogContext } from '../../context/DialogContext';
+import { useDialogContext } from '../../context/dialog/DialogContext';
 import { useState } from 'react';
 
 const ImportExportDialog = () => {

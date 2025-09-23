@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material"
 import { Search } from "@mui/icons-material"
-import { useDialogContext } from "../../context/DialogContext"
+import { useDialogContext } from "../../context/dialog/DialogContext"
 
 const SearchButton = () => {
   const { searchOpen, toggleSearch } = useDialogContext()

@@ -1,7 +1,7 @@
 import { Container, Dialog, Typography } from "@mui/material"
 
 import FeedbackForm from "./FeedbackForm"
-import { useDialogContext } from "../../context/DialogContext";
+import { useDialogContext } from "../../context/dialog/DialogContext";
 
 const FeedbackDialog = () => {
   const {feedbackOpen, toggleFeedback} = useDialogContext();

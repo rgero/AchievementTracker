@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
 
 import SettingsContent from './SettingsContent';
-import { useDialogContext } from '../../context/DialogContext';
+import { useDialogContext } from '../../context/dialog/DialogContext';
 
 const SettingsDialog = () => {
   const {settingsOpen, toggleSettings} = useDialogContext();

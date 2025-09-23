@@ -4,7 +4,7 @@ import { Achievement } from "../../interfaces/Achievement"
 import { convertWeight } from "../../utils/convertWeight"
 import {format} from 'date-fns'
 import { useAchievementsContext } from "../../context/achievement/AchievementContext"
-import { useDialogContext } from "../../context/DialogContext"
+import { useDialogContext } from "../../context/dialog/DialogContext"
 
 const AchievementRow = ({achievement}: {achievement: Achievement}) => {
   const theme = useTheme();

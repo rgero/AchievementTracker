@@ -4,7 +4,7 @@ import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Clear } from '@mui/icons-material';
 import { useAchievementsContext } from '../../context/achievement/AchievementContext';
-import { useDialogContext } from '../../context/DialogContext';
+import { useDialogContext } from '../../context/dialog/DialogContext';
 
 const SearchDialog = () => {
   const {searchOpen, toggleSearch} = useDialogContext();

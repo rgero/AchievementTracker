@@ -1,6 +1,6 @@
 import { Add } from "@mui/icons-material"
 import { IconButton } from "@mui/material"
-import { useDialogContext } from "../../context/DialogContext"
+import { useDialogContext } from "../../context/dialog/DialogContext"
 
 const AchievementButton = () => {
   const { achievementFormOpen, toggleAchievementForm } = useDialogContext()

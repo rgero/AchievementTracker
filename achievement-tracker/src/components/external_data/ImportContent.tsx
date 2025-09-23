@@ -1,16 +1,14 @@
+import { Achievement } from "../../interfaces/Achievement";
 import { Box } from "@mui/material"
 import FileSelector from "./FileSelector"
 import { useAchievementsContext } from "../../context/achievement/AchievementContext";
-import { useDialogContext } from "../../context/DialogContext";
-
-;
-
+import { useDialogContext } from "../../context/dialog/DialogContext";
 
 const ImportContent = () => {
   const {addMultipleAchievements} = useAchievementsContext();
   const {toggleImportExport} = useDialogContext();
 
-  const processSubmit = async (data) => {
+  const processSubmit = async (data: Achievement[]) => {
     try {
       await addMultipleAchievements(data);
       toggleImportExport();

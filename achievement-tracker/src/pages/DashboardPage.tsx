@@ -2,7 +2,7 @@ import { Container, Fab } from "@mui/material"
 
 import AchievementTable from "../components/achievement_presentation/AchievementTable"
 import { Add } from "@mui/icons-material";
-import { useDialogContext } from "../context/DialogContext"
+import { useDialogContext } from "../context/dialog/DialogContext";
 
 const DashboardPage = () => {
   const {toggleAchievementForm} = useDialogContext();

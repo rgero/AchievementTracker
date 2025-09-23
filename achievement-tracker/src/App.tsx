@@ -7,7 +7,7 @@ import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import { AuthenticationProvider } from "./context/authentication/AuthenicationProvider";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import DashboardPage from "./pages/DashboardPage";
-import { DialogProvider } from "./context/DialogContext";
+import { DialogProvider } from "./context/dialog/DialogProvider";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/ui/ErrorFallback";
 import LandingPage from "./pages/LandingPage";
